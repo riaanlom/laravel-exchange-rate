@@ -9,7 +9,7 @@ env:
   global:
     - setup=basic
 
-sudo: false
+os: linux
 
 install:
   - if [[ $setup = 'basic' ]]; then travis_retry composer install --no-interaction --prefer-source; fi
