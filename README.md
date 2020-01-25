@@ -136,7 +136,7 @@ The Laravel Exchange Rate is open-sourced software licensed under the [MIT licen
 [ico-laravel]: https://img.shields.io/badge/Laravel-6.x-red.svg?style=flat-square
 [ico-packagist]: https://img.shields.io/packagist/v/yoelpc4/laravel-exchange-rate.svg?style=flat-square
 [ico-build]: https://img.shields.io/travis/com/yoelpc4/laravel-exchange-rate?style=flat-square
-[ico-code-coverage]: https://img.shields.io/codecov/c/github/yoelpc4/laravel-exchange-rate?style=flat-square
+[ico-code-coverage]: https://codecov.io/gh/yoelpc4/laravel-exchange-rate/branch/master/graph/badge.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/yoelpc4/laravel-exchange-rate.svg?style=flat-square
 [ico-license]: https://img.shields.io/packagist/l/yoelpc4/laravel-exchange-rate.svg?style=flat-square
 [ico-code-of-conduct]: https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg

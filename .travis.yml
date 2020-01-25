@@ -19,4 +19,5 @@ install:
 script:
   - vendor/bin/phpunit --coverage-clover=coverage.xml
   - php coverage-checker.php coverage.xml 75
+  - curl --data-binary @codecov.yml https://codecov.io/validate
   - curl -s https://codecov.io/bash -t 6ab23827-762b-49ec-822a-82d087a17439
