@@ -42,7 +42,7 @@ abstract class TestCase extends OrchestraTestCase
 
         $app['config']->set('exchange-rate.default', env('EXCHANGE_RATE_PROVIDER'));
 
-        $app['config']->set('exchange-rate.services.free_currency_converter_api', [
+        $app['config']->set('exchange-rate.providers.free_currency_converter_api', [
             'api_key'  => env('FREE_CURRENCY_CONVERTER_API_KEY'),
             'base_url' => env('FREE_CURRENCY_CONVERTER_API_BASE_URL'),
         ]);

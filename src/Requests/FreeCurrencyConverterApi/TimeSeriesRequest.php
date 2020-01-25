@@ -125,7 +125,7 @@ class TimeSeriesRequest extends Request implements TimeSeriesRequestContract
     public function queryParams()
     {
         return [
-            'apiKey'  => \Config::get('exchange-rate.services.free_currency_converter_api.api_key'),
+            'apiKey'  => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
             'q'       => $this->makeQuery(),
             'date'    => $this->startDate,
             'endDate' => $this->endDate,

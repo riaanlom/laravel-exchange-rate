@@ -34,7 +34,7 @@ class Service implements ExchangeRateService
     public function __construct()
     {
         $this->api = new Api([
-            'base_uri' => \Config::get('exchange-rate.services.free_currency_converter_api.base_url'),
+            'base_uri' => \Config::get('exchange-rate.providers.free_currency_converter_api.base_url'),
         ]);
     }
 
