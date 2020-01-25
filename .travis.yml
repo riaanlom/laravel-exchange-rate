@@ -1,5 +1,7 @@
 language: php
 
+os: linux
+
 php:
   - 7.2
   - 7.3
@@ -9,13 +11,12 @@ env:
   global:
     - setup=basic
 
-os: linux
-
 install:
   - if [[ $setup = 'basic' ]]; then travis_retry composer install --no-interaction --prefer-source; fi
   - if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-source --no-interaction --prefer-stable; fi
   - if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-source --no-interaction --prefer-lowest --prefer-stable; fi
 
 script:
-  - vendor/bin/phpunit
-  - php coverage-checker.php clover.xml 75
+  - vendor/bin/phpunit --coverage-clover=coverage.xml
+  - php coverage-checker.php coverage.xml 75
+  - curl -s https://codecov.io/bash -t 6ab23827-762b-49ec-822a-82d087a17439

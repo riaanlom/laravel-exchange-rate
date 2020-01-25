@@ -10,9 +10,9 @@
 
 _Laravel Exchange Rate helper._
 
-## Requirements
+## Requirement
 
-- [Laravel 6.*](https://laravel.com)
+- [Laravel 6.x](https://laravel.com)
 
 ## Install
 
@@ -42,7 +42,7 @@ Supported exchange rate service providers:
 - [Free Currency Converter Api](https://free.currencyconverterapi.com/) (free_currency_converter_api)
  
 To switching between different providers, define the default exchange rate provider value in your .env 
-i.e: `EXCHANGE_RATE_PROVIDER=free_currency_converter_api`.
+`EXCHANGE_RATE_PROVIDER=free_currency_converter_api`
 
 After you've defined the default provider, you're ready to use this package's service. 
 

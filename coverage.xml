@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1579950562">
-  <project timestamp="1579950562">
+<coverage generated="1579958475">
+  <project timestamp="1579958475">
     <package name="Yoelpc4\LaravelExchangeRate\Exceptions">
       <file name="/Users/yoelpc4/Sites/Packages/yoelpc4/laravel-exchange-rate/src/Exceptions/HistoricalExchangeRateException.php">
         <class name="Yoelpc4\LaravelExchangeRate\Exceptions\HistoricalExchangeRateException" namespace="Yoelpc4\LaravelExchangeRate\Exceptions">
