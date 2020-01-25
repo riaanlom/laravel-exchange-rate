@@ -35,7 +35,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Yoelpc4\\LaravelExchangeRate\\Providers\\LaravelExchangeRateServiceProvider"
+                "Yoelpc4\\LaravelExchangeRate\\Providers\\ExchangeRateServiceProvider"
             ],
             "aliases": {
                 "ExchangeRate": "Yoelpc4\\LaravelExchangeRate\\Facades\\ExchangeRate"
