@@ -1,0 +1,50 @@
+{
+    "name": "yoelpc4/laravel-exchange-rate",
+    "description": "Laravel Exchange Rate helper.",
+    "keywords": [
+        "laravel",
+        "exchange rate",
+        "free currency converter api"
+    ],
+    "homepage": "https://github.com/yoelpc4/laravel-exchange-rate",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yoel Peter Chandra",
+            "email": "yoelpc4@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "guzzlehttp/guzzle": "^6.5.2",
+        "illuminate/http": "6.*",
+        "illuminate/support": "6.*",
+        "illuminate/validation": "6.*",
+        "psr/http-message": "^1.0.1"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.5.0",
+        "phpunit/phpunit": "^8.5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yoelpc4\\LaravelExchangeRate\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Yoelpc4\\LaravelExchangeRate\\Providers\\LaravelExchangeRateServiceProvider"
+            ],
+            "aliases": {
+                "ExchangeRate": "Yoelpc4\\LaravelExchangeRate\\Facades\\ExchangeRate"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
