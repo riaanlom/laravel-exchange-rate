@@ -20,4 +20,4 @@ script:
   - vendor/bin/phpunit --coverage-clover=coverage.xml
   - php coverage-checker.php coverage.xml 75
   - curl --data-binary @codecov.yml https://codecov.io/validate
-  - curl -s https://codecov.io/bash
+  - bash <(curl -s https://codecov.io/bash)
