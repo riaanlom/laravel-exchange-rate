@@ -30,7 +30,7 @@ Publish package configuration via command:
 php artisan vendor:publish --provider="Yoelpc4\LaravelExchangeRate\Providers\ExchangeRateServiceProvider" --tag=config
 ```
 
-You can also publish package resources via command:
+Publish package resources via command:
 
 ```bash
 php artisan vendor:publish --provider="Yoelpc4\LaravelExchangeRate\Providers\ExchangeRateServiceProvider" --tag=resources
