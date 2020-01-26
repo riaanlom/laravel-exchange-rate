@@ -52,7 +52,7 @@ Get the supported currencies data via syntax:
 
 ```php
 try {
-    $supportedCurrencies = \ExchangeRate::supportedCurrencies();
+    $supportedCurrencies = \ExchangeRateService::supportedCurrencies();
 } catch (\GuzzleHttp\Exception\GuzzleException $e) {
     throw $e;
 } catch (\Yoelpc4\LaravelExchangeRate\Exceptions\SupportedCurrenciesException $e) {
@@ -74,7 +74,7 @@ try {
         'USD', 'DZD',
     ];
     
-    $latestExchangeRate = \ExchangeRate::latest($base, $symbols);
+    $latestExchangeRate = \ExchangeRateService::latest($base, $symbols);
 } catch (\GuzzleHttp\Exception\GuzzleException $e) {
     throw $e;
 } catch (\Illuminate\Validation\ValidationException $e) {
@@ -100,7 +100,7 @@ try {
 
     $date = now()->subDays(3)->toDateString();
     
-    $historicalExchangeRate = \ExchangeRate::latest($base, $symbols, $date);
+    $historicalExchangeRate = \ExchangeRateService::latest($base, $symbols, $date);
 } catch (\GuzzleHttp\Exception\GuzzleException $e) {
     throw $e;
 } catch (\Illuminate\Validation\ValidationException $e) {
@@ -128,7 +128,7 @@ try {
 
     $endDate = now()->toDateString();
     
-    $timeSeriesExchangeRate = \ExchangeRate::timeSeries($base, $symbols, $startDate, $endDate);
+    $timeSeriesExchangeRate = \ExchangeRateService::timeSeries($base, $symbols, $startDate, $endDate);
 } catch (\GuzzleHttp\Exception\GuzzleException $e) {
     throw $e;
 } catch (\Illuminate\Validation\ValidationException $e) {
