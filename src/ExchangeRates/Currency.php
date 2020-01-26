@@ -14,6 +14,12 @@ class Currency
      */
     protected $symbol;
 
+    /**
+     * Currency constructor.
+     *
+     * @param  string  $name
+     * @param  string  $symbol
+     */
     public function __construct(string $name, string $symbol)
     {
         $this->name = $name;
