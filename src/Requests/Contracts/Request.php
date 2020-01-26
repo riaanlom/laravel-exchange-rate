@@ -2,8 +2,6 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Requests\Contracts;
 
-use Illuminate\Contracts\Validation\Validator;
-
 interface Request
 {
     /**
@@ -19,11 +17,4 @@ interface Request
      * @return array
      */
     public function queryParams();
-
-    /**
-     * Get request's validator
-     *
-     * @return Validator
-     */
-    public function validator();
 }

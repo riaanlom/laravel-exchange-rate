@@ -2,20 +2,18 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories;
 
-use Illuminate\Validation\ValidationException;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\TimeSeriesRequest;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\TimeSeriesExchangeRateRequest;
 
-interface TimeSeriesRequestFactory
+interface TimeSeriesExchangeRateRequestFactory
 {
     /**
-     * Create a new time series request instance.
+     * Create a new time series exchange rate request instance.
      *
      * @param  string  $base
      * @param  mixed  $symbols
      * @param  string  $startDate
      * @param  string  $endDate
-     * @return TimeSeriesRequest
-     * @throws ValidationException
+     * @return TimeSeriesExchangeRateRequest
      */
     public function make(string $base, $symbols, string $startDate, string $endDate);
 }

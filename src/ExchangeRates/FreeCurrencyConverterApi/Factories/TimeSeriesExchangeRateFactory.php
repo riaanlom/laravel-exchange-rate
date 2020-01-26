@@ -5,20 +5,18 @@ namespace Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi\Fac
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\Factories\TimeSeriesExchangeRateFactory as TimeSeriesExchangeRateFactoryContract;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi\TimeSeriesExchangeRate;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Rate;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\TimeSeriesRequest;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\TimeSeriesExchangeRateRequest;
 
 class TimeSeriesExchangeRateFactory implements TimeSeriesExchangeRateFactoryContract
 {
     /**
      * @inheritDoc
      */
-    public function make(TimeSeriesRequest $request, string $contents)
+    public function make(TimeSeriesExchangeRateRequest $request, string $contents)
     {
-        $base = strtoupper($request->base());
+        $base = $request->base();
 
-        $symbols = array_map(function ($symbol) {
-            return strtoupper($symbol);
-        }, $request->symbols());
+        $symbols = $request->symbols();
 
         $startDate = $request->startDate();
 

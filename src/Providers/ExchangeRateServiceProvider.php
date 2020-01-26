@@ -2,16 +2,18 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Providers;
 
-use Illuminate\Http\Response;
 use Illuminate\Support\ServiceProvider;
+use Symfony\Component\HttpFoundation\Response;
 use Yoelpc4\LaravelExchangeRate\Exceptions\ServiceException;
 use Yoelpc4\LaravelExchangeRate\ExchangeRate;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\Factories\HistoricalExchangeRateFactory;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\Factories\LatestExchangeRateFactory;
+use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\Factories\SupportedCurrenciesFactory;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\Factories\TimeSeriesExchangeRateFactory;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\HistoricalRequestFactory;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\LatestRequestFactory;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\TimeSeriesRequestFactory;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\HistoricalExchangeRateRequestFactory;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\LatestExchangeRateRequestFactory;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\SupportedCurrenciesRequestFactory;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\TimeSeriesExchangeRateRequestFactory;
 use Yoelpc4\LaravelExchangeRate\Services\Contracts\ExchangeRateService;
 
 class ExchangeRateServiceProvider extends ServiceProvider
@@ -21,13 +23,15 @@ class ExchangeRateServiceProvider extends ServiceProvider
      */
     protected $providers = [
         'free_currency_converter_api' => [
-            ExchangeRateService::class           => \Yoelpc4\LaravelExchangeRate\Services\FreeCurrencyConverterApi\Service::class,
-            LatestRequestFactory::class          => \Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi\Factories\LatestRequestFactory::class,
-            HistoricalRequestFactory::class      => \Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi\Factories\HistoricalRequestFactory::class,
-            TimeSeriesRequestFactory::class      => \Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi\Factories\TimeSeriesRequestFactory::class,
-            LatestExchangeRateFactory::class     => \Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi\Factories\LatestExchangeRateFactory::class,
-            HistoricalExchangeRateFactory::class => \Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi\Factories\HistoricalExchangeRateFactory::class,
-            TimeSeriesExchangeRateFactory::class => \Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi\Factories\TimeSeriesExchangeRateFactory::class,
+            ExchangeRateService::class                  => \Yoelpc4\LaravelExchangeRate\Services\FreeCurrencyConverterApi\Service::class,
+            SupportedCurrenciesRequestFactory::class    => \Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi\Factories\SupportedCurrenciesRequestFactory::class,
+            LatestExchangeRateRequestFactory::class     => \Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi\Factories\LatestExchangeRateRequestFactory::class,
+            HistoricalExchangeRateRequestFactory::class => \Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi\Factories\HistoricalExchangeRateRequestFactory::class,
+            TimeSeriesExchangeRateRequestFactory::class => \Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi\Factories\TimeSeriesExchangeRateRequestFactory::class,
+            SupportedCurrenciesFactory::class           => \Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi\Factories\SupportedCurrenciesFactory::class,
+            LatestExchangeRateFactory::class            => \Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi\Factories\LatestExchangeRateFactory::class,
+            HistoricalExchangeRateFactory::class        => \Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi\Factories\HistoricalExchangeRateFactory::class,
+            TimeSeriesExchangeRateFactory::class        => \Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi\Factories\TimeSeriesExchangeRateFactory::class,
         ],
     ];
 

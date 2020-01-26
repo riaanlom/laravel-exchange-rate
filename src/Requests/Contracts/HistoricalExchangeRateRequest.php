@@ -2,7 +2,7 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Requests\Contracts;
 
-interface HistoricalRequest extends Request
+interface HistoricalExchangeRateRequest extends Request
 {
     /**
      * Get historical exchange rate request's base

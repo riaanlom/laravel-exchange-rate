@@ -6,12 +6,37 @@ use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Validation\ValidationException;
 use Yoelpc4\LaravelExchangeRate\Exceptions\HistoricalExchangeRateException;
 use Yoelpc4\LaravelExchangeRate\Exceptions\LatestExchangeRateException;
+use Yoelpc4\LaravelExchangeRate\Exceptions\SupportedCurrenciesException;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\HistoricalExchangeRate;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\LatestExchangeRate;
+use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\SupportedCurrencies;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\TimeSeriesExchangeRate;
+use Yoelpc4\LaravelExchangeRate\ExchangeRates\Currency;
 
 class FreeCurrencyConverterApiTest extends TestCase
 {
+    /**
+     * Test for successful get supported currencies data.
+     *
+     * @throws GuzzleException
+     * @throws SupportedCurrenciesException
+     */
+    public function testSuccessfulSupportedCurrencies()
+    {
+        try {
+            $supportedCurrencies = \ExchangeRate::supportedCurrencies();
+
+            $this->assertTrue(
+                $supportedCurrencies instanceof SupportedCurrencies &&
+                count($supportedCurrencies->currencies())
+            );
+        } catch (GuzzleException $e) {
+            throw $e;
+        } catch (SupportedCurrenciesException $e) {
+            throw $e;
+        }
+    }
+
     /**
      * Test for successful get latest exchange rate data.
      *

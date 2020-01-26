@@ -3,34 +3,35 @@
 namespace Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi;
 
 use Illuminate\Support\Carbon;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\TimeSeriesRequest as TimeSeriesRequestContract;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\MustValidated;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\TimeSeriesExchangeRateRequest as TimeSeriesExchangeRateRequestContract;
 
-class TimeSeriesRequest extends Request implements TimeSeriesRequestContract
+class TimeSeriesExchangeRateRequest implements TimeSeriesExchangeRateRequestContract, MustValidated
 {
     use Util;
 
     /**
      * @var string
      */
-    protected $base;
+    public $base;
 
     /**
      * @var array
      */
-    protected $symbols;
+    public $symbols;
 
     /**
      * @var string
      */
-    protected $startDate;
+    public $startDate;
 
     /**
      * @var string
      */
-    protected $endDate;
+    public $endDate;
 
     /**
-     * TimeSeriesRequest constructor.
+     * TimeSeriesExchangeRateRequest constructor.
      *
      * @param  string  $base
      * @param  mixed  $symbols
@@ -39,9 +40,9 @@ class TimeSeriesRequest extends Request implements TimeSeriesRequestContract
      */
     public function __construct(string $base, $symbols, string $startDate, string $endDate)
     {
-        $this->base = strtoupper($base);
+        $this->base = $base;
 
-        $this->symbols = $this->makeSymbols($symbols);
+        $this->symbols = $symbols;
 
         $this->startDate = $startDate;
 
@@ -51,7 +52,29 @@ class TimeSeriesRequest extends Request implements TimeSeriesRequestContract
     /**
      * @inheritDoc
      */
-    protected function data()
+    public function uri()
+    {
+        return 'convert';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function queryParams()
+    {
+        return [
+            'apiKey'  => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
+            'q'       => $this->makeQuery(),
+            'date'    => $this->startDate,
+            'endDate' => $this->endDate,
+            'compact' => 'ultra',
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function data()
     {
         return [
             'base'       => $this->base,
@@ -66,7 +89,7 @@ class TimeSeriesRequest extends Request implements TimeSeriesRequestContract
      * @see https://free.currencyconverterapi.com/
      * @referencedAt 2020-01-24
      */
-    protected function rules()
+    public function rules()
     {
         $aYearAgo = now()->subYear()->subDay()->toDateString();
         $nineDaysAfterTheStartDate = Carbon::parse($this->startDate)->addDays(9)->toDateString();
@@ -83,7 +106,7 @@ class TimeSeriesRequest extends Request implements TimeSeriesRequestContract
     /**
      * @inheritDoc
      */
-    protected function messages()
+    public function messages()
     {
         return [
             'start_date.before' => \Lang::get('validation.before', [
@@ -108,7 +131,7 @@ class TimeSeriesRequest extends Request implements TimeSeriesRequestContract
     /**
      * @inheritDoc
      */
-    protected function customAttributes()
+    public function customAttributes()
     {
         return [
             'base'       => \Lang::get('laravel-exchange-rate::validation.attributes.base'),
@@ -116,20 +139,6 @@ class TimeSeriesRequest extends Request implements TimeSeriesRequestContract
             'symbols.*'  => \Lang::get('laravel-exchange-rate::validation.attributes.symbol'),
             'start_date' => \Lang::get('laravel-exchange-rate::validation.attributes.start_date'),
             'end_date'   => \Lang::get('laravel-exchange-rate::validation.attributes.end_date'),
-        ];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function queryParams()
-    {
-        return [
-            'apiKey'  => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
-            'q'       => $this->makeQuery(),
-            'date'    => $this->startDate,
-            'endDate' => $this->endDate,
-            'compact' => 'ultra',
         ];
     }
 

@@ -3,45 +3,58 @@
 namespace Yoelpc4\LaravelExchangeRate\Services\Contracts;
 
 use GuzzleHttp\Exception\GuzzleException;
+use Yoelpc4\LaravelExchangeRate\Exceptions\SupportedCurrenciesException;
 use Yoelpc4\LaravelExchangeRate\Exceptions\HistoricalExchangeRateException;
 use Yoelpc4\LaravelExchangeRate\Exceptions\LatestExchangeRateException;
 use Yoelpc4\LaravelExchangeRate\Exceptions\TimeSeriesExchangeRateException;
+use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\SupportedCurrencies;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\HistoricalExchangeRate;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\LatestExchangeRate;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\TimeSeriesExchangeRate;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\HistoricalRequest;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\LatestRequest;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\TimeSeriesRequest;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\SupportedCurrenciesRequest;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\HistoricalExchangeRateRequest;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\LatestExchangeRateRequest;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\TimeSeriesExchangeRateRequest;
 
 interface ExchangeRateService
 {
     /**
+     * Get the supported currencies data
+     *
+     * @param  SupportedCurrenciesRequest  $request
+     * @return SupportedCurrencies
+     * @throws GuzzleException
+     * @throws SupportedCurrenciesException
+     */
+    public function supportedCurrencies(SupportedCurrenciesRequest $request);
+
+    /**
      * Get the latest exchange rate data
      *
-     * @param  LatestRequest  $request
+     * @param  LatestExchangeRateRequest  $request
      * @return LatestExchangeRate
      * @throws GuzzleException
      * @throws LatestExchangeRateException
      */
-    public function latest(LatestRequest $request);
+    public function latest(LatestExchangeRateRequest $request);
 
     /**
      * Get the historical exchange rate data
      *
-     * @param  HistoricalRequest  $request
+     * @param  HistoricalExchangeRateRequest  $request
      * @return HistoricalExchangeRate
      * @throws GuzzleException
      * @throws HistoricalExchangeRateException
      */
-    public function historical(HistoricalRequest $request);
+    public function historical(HistoricalExchangeRateRequest $request);
 
     /**
      * Get the time series exchange rate data
      *
-     * @param  TimeSeriesRequest  $request
+     * @param  TimeSeriesExchangeRateRequest  $request
      * @return TimeSeriesExchangeRate
      * @throws GuzzleException
      * @throws TimeSeriesExchangeRateException
      */
-    public function timeSeries(TimeSeriesRequest $request);
+    public function timeSeries(TimeSeriesExchangeRateRequest $request);
 }

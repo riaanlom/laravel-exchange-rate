@@ -2,29 +2,30 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi;
 
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\HistoricalRequest as HistoricalRequestContract;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\HistoricalExchangeRateRequest as HistoricalExchangeRateRequestContract;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\MustValidated;
 
-class HistoricalRequest extends Request implements HistoricalRequestContract
+class HistoricalExchangeRateRequest implements HistoricalExchangeRateRequestContract, MustValidated
 {
     use Util;
 
     /**
      * @var string
      */
-    protected $base;
+    public $base;
 
     /**
      * @var array
      */
-    protected $symbols;
+    public $symbols;
 
     /**
      * @var string
      */
-    protected $date;
+    public $date;
 
     /**
-     * HistoricalRequest constructor.
+     * HistoricalExchangeRateRequest constructor.
      *
      * @param  string  $base
      * @param  mixed  $symbols
@@ -32,9 +33,9 @@ class HistoricalRequest extends Request implements HistoricalRequestContract
      */
     public function __construct(string $base, $symbols, string $date)
     {
-        $this->base = strtoupper($base);
+        $this->base = $base;
 
-        $this->symbols = $this->makeSymbols($symbols);
+        $this->symbols = $symbols;
 
         $this->date = $date;
     }
@@ -42,7 +43,28 @@ class HistoricalRequest extends Request implements HistoricalRequestContract
     /**
      * @inheritDoc
      */
-    protected function data()
+    public function uri()
+    {
+        return 'convert';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function queryParams()
+    {
+        return [
+            'apiKey'  => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
+            'q'       => $this->makeQuery(),
+            'date'    => $this->date,
+            'compact' => 'ultra',
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function data()
     {
         return [
             'base'    => $this->base,
@@ -56,7 +78,7 @@ class HistoricalRequest extends Request implements HistoricalRequestContract
      * @see https://free.currencyconverterapi.com/
      * @referencedAt 2020-01-24
      */
-    protected function rules()
+    public function rules()
     {
         $aYearAgo = now()->subYear()->subDay()->toDateString();
 
@@ -71,7 +93,7 @@ class HistoricalRequest extends Request implements HistoricalRequestContract
     /**
      * @inheritDoc
      */
-    protected function messages()
+    public function messages()
     {
         return [
             'date.after'  => \Lang::get('laravel-exchange-rate::validation.custom.a_year_ago', [
@@ -87,26 +109,13 @@ class HistoricalRequest extends Request implements HistoricalRequestContract
     /**
      * @inheritDoc
      */
-    protected function customAttributes()
+    public function customAttributes()
     {
         return [
             'base'      => \Lang::get('laravel-exchange-rate::validation.attributes.base'),
             'symbols'   => \Lang::get('laravel-exchange-rate::validation.attributes.symbols'),
             'symbols.*' => \Lang::get('laravel-exchange-rate::validation.attributes.symbol'),
             'date'      => \Lang::get('laravel-exchange-rate::validation.attributes.date'),
-        ];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function queryParams()
-    {
-        return [
-            'apiKey'  => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
-            'q'       => $this->makeQuery(),
-            'date'    => $this->date,
-            'compact' => 'ultra',
         ];
     }
 

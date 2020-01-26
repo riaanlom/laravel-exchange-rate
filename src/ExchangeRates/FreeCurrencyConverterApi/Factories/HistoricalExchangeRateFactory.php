@@ -5,20 +5,18 @@ namespace Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi\Fac
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\Factories\HistoricalExchangeRateFactory as HistoricalExchangeRateFactoryContract;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi\HistoricalExchangeRate;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Rate;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\HistoricalRequest;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\HistoricalExchangeRateRequest;
 
 class HistoricalExchangeRateFactory implements HistoricalExchangeRateFactoryContract
 {
     /**
      * @inheritDoc
      */
-    public function make(HistoricalRequest $request, string $contents)
+    public function make(HistoricalExchangeRateRequest $request, string $contents)
     {
-        $base = strtoupper($request->base());
+        $base = $request->base();
 
-        $symbols = array_map(function ($symbol) {
-            return strtoupper($symbol);
-        }, $request->symbols());
+        $symbols = $request->symbols();
 
         $date = $request->date();
 

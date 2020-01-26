@@ -3,26 +3,24 @@
 namespace Yoelpc4\LaravelExchangeRate\Services\FreeCurrencyConverterApi;
 
 use GuzzleHttp\Exception\GuzzleException;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Yoelpc4\LaravelExchangeRate\Exceptions\HistoricalExchangeRateException;
 use Yoelpc4\LaravelExchangeRate\Exceptions\LatestExchangeRateException;
+use Yoelpc4\LaravelExchangeRate\Exceptions\SupportedCurrenciesException;
 use Yoelpc4\LaravelExchangeRate\Exceptions\TimeSeriesExchangeRateException;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\Factories\HistoricalExchangeRateFactory;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\Factories\LatestExchangeRateFactory;
+use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\Factories\SupportedCurrenciesFactory;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\Factories\TimeSeriesExchangeRateFactory;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\HistoricalRequest;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\LatestRequest;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\TimeSeriesRequest;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\HistoricalExchangeRateRequest;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\LatestExchangeRateRequest;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\SupportedCurrenciesRequest;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\TimeSeriesExchangeRateRequest;
 use Yoelpc4\LaravelExchangeRate\Services\Api;
 use Yoelpc4\LaravelExchangeRate\Services\Contracts\ExchangeRateService;
 
 class Service implements ExchangeRateService
 {
-    /**
-     * @var string
-     */
-    protected $apiKey;
-
     /**
      * @var Api
      */
@@ -41,7 +39,29 @@ class Service implements ExchangeRateService
     /**
      * @inheritDoc
      */
-    public function latest(LatestRequest $request)
+    public function supportedCurrencies(SupportedCurrenciesRequest $request)
+    {
+        try {
+            $response = $this->api->get($request);
+
+            $statusCode = $response->getStatusCode();
+
+            $contents = $response->getBody()->getContents();
+
+            if ($statusCode !== Response::HTTP_OK) {
+                throw new SupportedCurrenciesException($contents, $statusCode);
+            }
+
+            return \App::make(SupportedCurrenciesFactory::class)->make($contents);
+        } catch (GuzzleException $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function latest(LatestExchangeRateRequest $request)
     {
         try {
             $response = $this->api->get($request);
@@ -55,7 +75,6 @@ class Service implements ExchangeRateService
             }
 
             return \App::make(LatestExchangeRateFactory::class)->make($request, $contents);
-
         } catch (GuzzleException $e) {
             throw $e;
         }
@@ -64,7 +83,7 @@ class Service implements ExchangeRateService
     /**
      * @inheritDoc
      */
-    public function historical(HistoricalRequest $request)
+    public function historical(HistoricalExchangeRateRequest $request)
     {
         try {
             $response = $this->api->get($request);
@@ -86,7 +105,7 @@ class Service implements ExchangeRateService
     /**
      * @inheritDoc
      */
-    public function timeSeries(TimeSeriesRequest $request)
+    public function timeSeries(TimeSeriesExchangeRateRequest $request)
     {
         try {
             $response = $this->api->get($request);

@@ -5,20 +5,18 @@ namespace Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi\Fac
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\Factories\LatestExchangeRateFactory as LatestExchangeRateFactoryContract;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi\LatestExchangeRate;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Rate;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\LatestRequest;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\LatestExchangeRateRequest;
 
 class LatestExchangeRateFactory implements LatestExchangeRateFactoryContract
 {
     /**
      * @inheritDoc
      */
-    public function make(LatestRequest $request, string $contents)
+    public function make(LatestExchangeRateRequest $request, string $contents)
     {
-        $base = strtoupper($request->base());
+        $base = $request->base();
 
-        $symbols = array_map(function ($symbol) {
-            return strtoupper($symbol);
-        }, $request->symbols());
+        $symbols = $request->symbols();
 
         $data = json_decode($contents, true);
 

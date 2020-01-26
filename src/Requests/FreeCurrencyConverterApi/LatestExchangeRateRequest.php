@@ -2,9 +2,10 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi;
 
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\LatestRequest as LatestRequestContract;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\LatestExchangeRateRequest as LatestExchangeRateRequestContract;
+use Yoelpc4\LaravelExchangeRate\Requests\Contracts\MustValidated;
 
-class LatestRequest extends Request implements LatestRequestContract
+class LatestExchangeRateRequest implements LatestExchangeRateRequestContract, MustValidated
 {
     use Util;
 
@@ -19,61 +20,24 @@ class LatestRequest extends Request implements LatestRequestContract
     protected $symbols;
 
     /**
-     * LatestRequest constructor.
+     * LatestExchangeRateRequest constructor.
      *
      * @param  string  $base
      * @param  mixed  $symbols
      */
     public function __construct(string $base, $symbols)
     {
-        $this->base = strtoupper($base);
+        $this->base = $base;
 
-        $this->symbols = $this->makeSymbols($symbols);
+        $this->symbols = $symbols;
     }
 
     /**
      * @inheritDoc
      */
-    protected function data()
+    public function uri()
     {
-        return [
-            'base'    => $this->base,
-            'symbols' => $this->symbols,
-        ];
-    }
-
-    /**
-     * @inheritDoc
-     * @see https://free.currencyconverterapi.com/
-     * @referencedAt 2020-01-24
-     */
-    protected function rules()
-    {
-        return [
-            'base'      => 'required|string|size:3',
-            'symbols'   => 'required|array|between:1,2',
-            'symbols.*' => 'required|string|size:3',
-        ];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function messages()
-    {
-        return [];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function customAttributes()
-    {
-        return [
-            'base'      => \Lang::get('laravel-exchange-rate::validation.attributes.base'),
-            'symbols'   => \Lang::get('laravel-exchange-rate::validation.attributes.symbols'),
-            'symbols.*' => \Lang::get('laravel-exchange-rate::validation.attributes.symbol'),
-        ];
+        return 'convert';
     }
 
     /**
@@ -87,6 +51,52 @@ class LatestRequest extends Request implements LatestRequestContract
             'compact' => 'ultra',
         ];
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function data()
+    {
+        return [
+            'base'    => $this->base,
+            'symbols' => $this->symbols,
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     * @see https://free.currencyconverterapi.com/
+     * @referencedAt 2020-01-24
+     */
+    public function rules()
+    {
+        return [
+            'base'      => 'required|string|size:3',
+            'symbols'   => 'required|array|between:1,2',
+            'symbols.*' => 'required|string|size:3',
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function messages()
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function customAttributes()
+    {
+        return [
+            'base'      => \Lang::get('laravel-exchange-rate::validation.attributes.base'),
+            'symbols'   => \Lang::get('laravel-exchange-rate::validation.attributes.symbols'),
+            'symbols.*' => \Lang::get('laravel-exchange-rate::validation.attributes.symbol'),
+        ];
+    }
+
 
     /**
      * @inheritDoc
