@@ -1,6 +1,6 @@
 <?php
 
-namespace Yoelpc4\LaravelExchangeRate\tests;
+namespace Yoelpc4\LaravelExchangeRate\Tests;
 
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
@@ -34,7 +34,7 @@ abstract class TestCase extends OrchestraTestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-        $app->useEnvironmentPath(__DIR__.'/../..')
+        $app->useEnvironmentPath(__DIR__.'/../../laravel-exchange-rate')
             ->loadEnvironmentFrom('.env.testing')
             ->bootstrapWith([
                 LoadEnvironmentVariables::class,

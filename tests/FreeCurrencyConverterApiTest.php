@@ -1,6 +1,6 @@
 <?php
 
-namespace Yoelpc4\LaravelExchangeRate\tests;
+namespace Yoelpc4\LaravelExchangeRate\Tests;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Validation\ValidationException;
@@ -12,6 +12,7 @@ use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\LatestExchangeRate;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\SupportedCurrencies;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\TimeSeriesExchangeRate;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Currency;
+use Yoelpc4\LaravelExchangeRate\ExchangeRates\Rate;
 
 class FreeCurrencyConverterApiTest extends TestCase
 {
@@ -26,10 +27,17 @@ class FreeCurrencyConverterApiTest extends TestCase
         try {
             $supportedCurrencies = \ExchangeRate::supportedCurrencies();
 
-            $this->assertTrue(
-                $supportedCurrencies instanceof SupportedCurrencies &&
-                count($supportedCurrencies->currencies())
-            );
+            $this->assertTrue($supportedCurrencies instanceof SupportedCurrencies);
+
+            $this->assertTrue(property_exists($supportedCurrencies, 'currencies'));
+
+            foreach ($supportedCurrencies->currencies() as $currency) {
+                $this->assertTrue($currency instanceof Currency);
+
+                $this->assertTrue(property_exists($currency, 'name'));
+
+                $this->assertTrue(property_exists($currency, 'symbol'));
+            }
         } catch (GuzzleException $e) {
             throw $e;
         } catch (SupportedCurrenciesException $e) {
@@ -47,6 +55,7 @@ class FreeCurrencyConverterApiTest extends TestCase
     public function testSuccessfulLatestExchangeRate()
     {
         $base = 'IDR';
+
         $symbols = [
             'USD', 'DZD',
         ];
@@ -54,12 +63,23 @@ class FreeCurrencyConverterApiTest extends TestCase
         try {
             $latestExchangeRate = \ExchangeRate::latest($base, $symbols);
 
-            $this->assertTrue(
-                $latestExchangeRate instanceof LatestExchangeRate &&
-                $latestExchangeRate->base() === $base &&
-                $latestExchangeRate->symbols() === $symbols &&
-                count($latestExchangeRate->rates())
-            );
+            $this->assertTrue($latestExchangeRate instanceof LatestExchangeRate);
+
+            $this->assertTrue($latestExchangeRate->base() === $base);
+
+            $this->assertTrue($latestExchangeRate->symbols() === $symbols);
+
+            foreach ($latestExchangeRate->rates() as $rate) {
+                $this->assertTrue($rate instanceof Rate);
+
+                $this->assertTrue($rate->fromCurrency() === $base);
+
+                $this->assertTrue(in_array($rate->toCurrency(), $symbols));
+
+                $this->assertTrue(property_exists($rate, 'date'));
+
+                $this->assertTrue(property_exists($rate, 'value'));
+            }
         } catch (GuzzleException $e) {
             throw $e;
         } catch (ValidationException $e) {
@@ -89,13 +109,25 @@ class FreeCurrencyConverterApiTest extends TestCase
         try {
             $historicalExchangeRate = \ExchangeRate::historical($base, $symbols, $date);
 
-            $this->assertTrue(
-                $historicalExchangeRate instanceof HistoricalExchangeRate &&
-                $historicalExchangeRate->base() === $base &&
-                $historicalExchangeRate->symbols() === $symbols &&
-                $historicalExchangeRate->date() === $date &&
-                count($historicalExchangeRate->rates())
-            );
+            $this->assertTrue($historicalExchangeRate instanceof HistoricalExchangeRate);
+
+            $this->assertTrue($historicalExchangeRate->base() === $base);
+
+            $this->assertTrue($historicalExchangeRate->symbols() === $symbols);
+
+            $this->assertTrue($historicalExchangeRate->date() === $date);
+
+            foreach ($historicalExchangeRate->rates() as $rate) {
+                $this->assertTrue($rate instanceof Rate);
+
+                $this->assertTrue($rate->fromCurrency() === $base);
+
+                $this->assertTrue(in_array($rate->toCurrency(), $symbols));
+
+                $this->assertTrue(property_exists($rate, 'date'));
+
+                $this->assertTrue(property_exists($rate, 'value'));
+            }
         } catch (GuzzleException $e) {
             throw $e;
         } catch (ValidationException $e) {
@@ -129,14 +161,29 @@ class FreeCurrencyConverterApiTest extends TestCase
         try {
             $timeSeriesExchangeRate = \ExchangeRate::timeSeries($base, $symbols, $startDate, $endDate);
 
-            $this->assertTrue(
-                $timeSeriesExchangeRate instanceof TimeSeriesExchangeRate &&
-                $timeSeriesExchangeRate->base() === $base &&
-                $timeSeriesExchangeRate->symbols() === $symbols &&
-                $timeSeriesExchangeRate->startDate() === $startDate &&
-                $timeSeriesExchangeRate->endDate() === $endDate &&
-                count($timeSeriesExchangeRate->rates()) === (count($symbols) * ($dayDiff + 1))
-            );
+            $this->assertTrue($timeSeriesExchangeRate instanceof TimeSeriesExchangeRate);
+
+            $this->assertTrue($timeSeriesExchangeRate->base() === $base);
+
+            $this->assertTrue($timeSeriesExchangeRate->symbols() === $symbols);
+
+            $this->assertTrue($timeSeriesExchangeRate->startDate() === $startDate);
+
+            $this->assertTrue($timeSeriesExchangeRate->endDate() === $endDate);
+
+            foreach ($timeSeriesExchangeRate->rates() as $rate) {
+                $this->assertTrue($rate instanceof Rate);
+
+                $this->assertTrue($rate->fromCurrency() === $base);
+
+                $this->assertTrue(in_array($rate->toCurrency(), $symbols));
+
+                $this->assertTrue(property_exists($rate, 'date'));
+
+                $this->assertTrue(property_exists($rate, 'value'));
+            }
+
+            $this->assertTrue(count($timeSeriesExchangeRate->rates()) === (count($symbols) * ($dayDiff + 1)));
         } catch (GuzzleException $e) {
             throw $e;
         } catch (ValidationException $e) {

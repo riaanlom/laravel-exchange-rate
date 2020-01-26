@@ -29,7 +29,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Yoelpc4\\LaravelExchangeRate\\": "src"
+            "Yoelpc4\\LaravelExchangeRate\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Yoelpc4\\LaravelExchangeRate\\Tests\\": "tests/"
         }
     },
     "extra": {

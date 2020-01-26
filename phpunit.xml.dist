@@ -12,7 +12,7 @@
 >
     <testsuites>
         <testsuite name="Package Test Suite">
-            <directory suffix="Test.php">./src/tests/</directory>
+            <directory suffix="Test.php">./tests/</directory>
         </testsuite>
     </testsuites>
     <filter>
@@ -21,6 +21,6 @@
         </whitelist>
     </filter>
     <logging>
-        <log type="coverage-clover" target="clover.xml"/>
+        <log type="coverage-clover" target="coverage.xml"/>
     </logging>
 </phpunit>
