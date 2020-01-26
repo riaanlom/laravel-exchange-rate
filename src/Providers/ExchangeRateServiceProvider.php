@@ -2,10 +2,11 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Providers;
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Symfony\Component\HttpFoundation\Response;
-use Yoelpc4\LaravelExchangeRate\Exceptions\ServiceException;
-use Yoelpc4\LaravelExchangeRate\ExchangeRate;
+use Yoelpc4\LaravelExchangeRate\Exceptions\ProviderException;
+use Yoelpc4\LaravelExchangeRate\ExchangeRateService;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\Factories\HistoricalExchangeRateFactory;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\Factories\LatestExchangeRateFactory;
 use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\Factories\SupportedCurrenciesFactory;
@@ -14,7 +15,9 @@ use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\HistoricalExchangeR
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\LatestExchangeRateRequestFactory;
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\SupportedCurrenciesRequestFactory;
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\TimeSeriesExchangeRateRequestFactory;
-use Yoelpc4\LaravelExchangeRate\Services\Contracts\ExchangeRateService;
+use Yoelpc4\LaravelExchangeRate\Services\Contracts\Api;
+use Yoelpc4\LaravelExchangeRate\Services\Contracts\Service;
+use Yoelpc4\LaravelExchangeRate\Services\GuzzleHttpApi;
 
 class ExchangeRateServiceProvider extends ServiceProvider
 {
@@ -23,7 +26,7 @@ class ExchangeRateServiceProvider extends ServiceProvider
      */
     protected $providers = [
         'free_currency_converter_api' => [
-            ExchangeRateService::class                  => \Yoelpc4\LaravelExchangeRate\Services\FreeCurrencyConverterApi\Service::class,
+            Service::class                              => \Yoelpc4\LaravelExchangeRate\Services\FreeCurrencyConverterApi\Service::class,
             SupportedCurrenciesRequestFactory::class    => \Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi\Factories\SupportedCurrenciesRequestFactory::class,
             LatestExchangeRateRequestFactory::class     => \Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi\Factories\LatestExchangeRateRequestFactory::class,
             HistoricalExchangeRateRequestFactory::class => \Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi\Factories\HistoricalExchangeRateRequestFactory::class,
@@ -39,20 +42,24 @@ class ExchangeRateServiceProvider extends ServiceProvider
      * Register services.
      *
      * @return void
-     * @throws ServiceException
+     * @throws ProviderException
      */
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/exchange-rate.php', 'exchange-rate');
 
+        $this->app->singleton(Api::class, function (Application $app, array $params) {
+            return new GuzzleHttpApi($params);
+        });
+
         try {
-            $this->registerBindings();
-        } catch (ServiceException $e) {
+            $this->registerProvider();
+        } catch (ProviderException $e) {
             throw $e;
         }
 
-        $this->app->singleton('yoelpc4.exchange_rate', function () {
-            return new ExchangeRate;
+        $this->app->singleton('exchange_rate_service', function () {
+            return new ExchangeRateService;
         });
     }
 
@@ -77,14 +84,14 @@ class ExchangeRateServiceProvider extends ServiceProvider
     /**
      * Register third party exchange rate service provider map
      *
-     * @throws ServiceException
+     * @throws ProviderException
      */
-    protected function registerBindings()
+    protected function registerProvider()
     {
         $default = \Config::get('exchange-rate.default');
 
         if (! in_array($default, array_keys($this->providers))) {
-            throw new ServiceException('Undefined exchange rate service.', Response::HTTP_INTERNAL_SERVER_ERROR);
+            throw new ProviderException('Undefined exchange rate provider.', Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         foreach ($this->providers[$default] as $abstract => $concrete) {

@@ -16,7 +16,7 @@ use Yoelpc4\LaravelExchangeRate\Requests\Contracts\HistoricalExchangeRateRequest
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\LatestExchangeRateRequest;
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\TimeSeriesExchangeRateRequest;
 
-interface ExchangeRateService
+interface Service
 {
     /**
      * Get the supported currencies data

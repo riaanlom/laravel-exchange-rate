@@ -6,8 +6,9 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Request;
+use Yoelpc4\LaravelExchangeRate\Services\Contracts\Api;
 
-class Api
+class GuzzleHttpApi implements Api
 {
     /**
      * @var Client
@@ -15,7 +16,7 @@ class Api
     protected $client;
 
     /**
-     * Api constructor.
+     * GuzzleHttpApi constructor.
      *
      * @param  array  $config
      */

@@ -16,10 +16,10 @@ use Yoelpc4\LaravelExchangeRate\Requests\Contracts\HistoricalExchangeRateRequest
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\LatestExchangeRateRequest;
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\SupportedCurrenciesRequest;
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\TimeSeriesExchangeRateRequest;
-use Yoelpc4\LaravelExchangeRate\Services\Api;
-use Yoelpc4\LaravelExchangeRate\Services\Contracts\ExchangeRateService;
+use Yoelpc4\LaravelExchangeRate\Services\Contracts\Api;
+use Yoelpc4\LaravelExchangeRate\Services\Contracts\Service as ServiceContract;
 
-class Service implements ExchangeRateService
+class Service implements ServiceContract
 {
     /**
      * @var Api
@@ -31,7 +31,7 @@ class Service implements ExchangeRateService
      */
     public function __construct()
     {
-        $this->api = new Api([
+        $this->api = \App::make(Api::class, [
             'base_uri' => \Config::get('exchange-rate.providers.free_currency_converter_api.base_url'),
         ]);
     }

@@ -14,21 +14,21 @@ use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\LatestExchangeRateR
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\SupportedCurrenciesRequestFactory;
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\TimeSeriesExchangeRateRequestFactory;
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\MustValidated;
-use Yoelpc4\LaravelExchangeRate\Services\Contracts\ExchangeRateService;
+use Yoelpc4\LaravelExchangeRate\Services\Contracts\Service;
 
-class ExchangeRate
+class ExchangeRateService
 {
     /**
-     * @var ExchangeRateService
+     * @var Service
      */
     protected $service;
 
     /**
-     * ExchangeRate constructor.
+     * ExchangeRateService constructor.
      */
     public function __construct()
     {
-        $this->service = \App::make(ExchangeRateService::class);
+        $this->service = \App::make(Service::class);
     }
 
     /**

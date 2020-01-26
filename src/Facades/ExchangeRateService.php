@@ -4,7 +4,7 @@ namespace Yoelpc4\LaravelExchangeRate\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class ExchangeRate extends Facade
+class ExchangeRateService extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +13,6 @@ class ExchangeRate extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'yoelpc4.exchange_rate';
+        return 'exchange_rate_service';
     }
 }

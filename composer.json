@@ -43,7 +43,7 @@
                 "Yoelpc4\\LaravelExchangeRate\\Providers\\ExchangeRateServiceProvider"
             ],
             "aliases": {
-                "ExchangeRate": "Yoelpc4\\LaravelExchangeRate\\Facades\\ExchangeRate"
+                "ExchangeRateService": "Yoelpc4\\LaravelExchangeRate\\Facades\\ExchangeRateService"
             }
         }
     },

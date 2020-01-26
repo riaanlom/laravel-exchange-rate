@@ -25,7 +25,7 @@ class FreeCurrencyConverterApiTest extends TestCase
     public function testSuccessfulSupportedCurrencies()
     {
         try {
-            $supportedCurrencies = \ExchangeRate::supportedCurrencies();
+            $supportedCurrencies = \ExchangeRateService::supportedCurrencies();
 
             $this->assertTrue($supportedCurrencies instanceof SupportedCurrencies);
 
@@ -61,7 +61,7 @@ class FreeCurrencyConverterApiTest extends TestCase
         ];
 
         try {
-            $latestExchangeRate = \ExchangeRate::latest($base, $symbols);
+            $latestExchangeRate = \ExchangeRateService::latest($base, $symbols);
 
             $this->assertTrue($latestExchangeRate instanceof LatestExchangeRate);
 
@@ -107,7 +107,7 @@ class FreeCurrencyConverterApiTest extends TestCase
         $date = now()->subDays(3)->toDateString();
 
         try {
-            $historicalExchangeRate = \ExchangeRate::historical($base, $symbols, $date);
+            $historicalExchangeRate = \ExchangeRateService::historical($base, $symbols, $date);
 
             $this->assertTrue($historicalExchangeRate instanceof HistoricalExchangeRate);
 
@@ -159,7 +159,7 @@ class FreeCurrencyConverterApiTest extends TestCase
         $endDate = now()->toDateString();
 
         try {
-            $timeSeriesExchangeRate = \ExchangeRate::timeSeries($base, $symbols, $startDate, $endDate);
+            $timeSeriesExchangeRate = \ExchangeRateService::timeSeries($base, $symbols, $startDate, $endDate);
 
             $this->assertTrue($timeSeriesExchangeRate instanceof TimeSeriesExchangeRate);
 

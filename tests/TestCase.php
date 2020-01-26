@@ -4,7 +4,7 @@ namespace Yoelpc4\LaravelExchangeRate\Tests;
 
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
-use Yoelpc4\LaravelExchangeRate\Facades\ExchangeRate;
+use Yoelpc4\LaravelExchangeRate\Facades\ExchangeRateService;
 use Yoelpc4\LaravelExchangeRate\Providers\ExchangeRateServiceProvider;
 
 abstract class TestCase extends OrchestraTestCase
@@ -25,7 +25,7 @@ abstract class TestCase extends OrchestraTestCase
     protected function getPackageAliases($app)
     {
         return [
-            'ExchangeRate' => ExchangeRate::class,
+            'ExchangeRateService' => ExchangeRateService::class,
         ];
     }
 

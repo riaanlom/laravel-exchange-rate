@@ -4,7 +4,7 @@ namespace Yoelpc4\LaravelExchangeRate\Exceptions;
 
 use Exception;
 
-class ServiceException extends Exception
+class ProviderException extends Exception
 {
 
 }
