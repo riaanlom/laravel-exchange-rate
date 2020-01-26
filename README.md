@@ -46,6 +46,20 @@ To switching between different providers, define the default exchange rate provi
 
 After you've defined the default provider, you're ready to use this package's service. 
 
+## Supported Currencies
+
+Get the supported currencies data via syntax:
+
+```php
+try {
+    $supportedCurrencies = \ExchangeRate::supportedCurrencies();
+} catch (\GuzzleHttp\Exception\GuzzleException $e) {
+    throw $e;
+} catch (\Yoelpc4\LaravelExchangeRate\Exceptions\SupportedCurrenciesException $e) {
+    throw $e;
+}
+```
+
 ## Latest Exchange Rate
 
 Get the latest exchange rate data via syntax:
@@ -126,7 +140,7 @@ The return value always instance of `Yoelpc4\LaravelExchangeRate\ExchangeRates\C
 
 ## Side Note
 
-This package will run validation based on respective provider rules before sending the request to the provider's server,
+This package will run validation based on respective provider rules before sending some requests to the provider,
 therefore it will throw `\Illuminate\Validation\ValidationException` for every unmet validation rules.
 
 ## License
