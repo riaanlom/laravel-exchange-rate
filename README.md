@@ -60,6 +60,8 @@ try {
 }
 ```
 
+The return value always instance of `\Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\SupportedCurrencies`.
+
 ## Latest Exchange Rate
 
 Get the latest exchange rate data via syntax:
@@ -82,7 +84,7 @@ try {
 }
 ```
 
-The return value always instance of `Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\LatestExchangeRate`.
+The return value always instance of `\Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\LatestExchangeRate`.
 
 ## Historical Exchange Rate
 
@@ -108,7 +110,7 @@ try {
 }
 ```
 
-The return value always instance of `Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\HistoricalExchangeRate`.
+The return value always instance of `\Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\HistoricalExchangeRate`.
 
 ## Time Series Exchange Rate
 
@@ -136,7 +138,7 @@ try {
 }
 ```
 
-The return value always instance of `Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\TimeSeriesExchangeRate`.
+The return value always instance of `\Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\TimeSeriesExchangeRate`.
 
 ## Side Note
 
