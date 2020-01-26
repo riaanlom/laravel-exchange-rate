@@ -7,12 +7,12 @@ class Rate
     /**
      * @var string
      */
-    protected $fromCurrency;
+    protected $baseCurrency;
 
     /**
      * @var string
      */
-    protected $toCurrency;
+    protected $targetCurrency;
 
     /**
      * @var string
@@ -27,37 +27,37 @@ class Rate
     /**
      * Rate constructor.
      *
-     * @param  string  $fromCurrency
-     * @param  string  $toCurrency
+     * @param  string  $baseCurrency
+     * @param  string  $targetCurrency
      * @param  float  $value
      * @param  string  $date
      */
-    public function __construct(string $fromCurrency, string $toCurrency, string $date, float $value)
+    public function __construct(string $baseCurrency, string $targetCurrency, string $date, float $value)
     {
-        $this->fromCurrency = $fromCurrency;
-        $this->toCurrency = $toCurrency;
+        $this->baseCurrency = $baseCurrency;
+        $this->targetCurrency = $targetCurrency;
         $this->date = $date;
         $this->value = $value;
     }
 
     /**
-     * Get rate's from currency
+     * Get rate's base currency
      *
      * @return string
      */
-    public function fromCurrency()
+    public function baseCurrency()
     {
-        return $this->fromCurrency;
+        return $this->baseCurrency;
     }
 
     /**
-     * Get rate's to currency
+     * Get rate's target currency
      *
      * @return string
      */
-    public function toCurrency()
+    public function targetCurrency()
     {
-        return $this->toCurrency;
+        return $this->targetCurrency;
     }
 
     /**

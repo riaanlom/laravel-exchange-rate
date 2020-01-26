@@ -72,9 +72,9 @@ class FreeCurrencyConverterApiTest extends TestCase
             foreach ($latestExchangeRate->rates() as $rate) {
                 $this->assertTrue($rate instanceof Rate);
 
-                $this->assertTrue($rate->fromCurrency() === $base);
+                $this->assertTrue($rate->baseCurrency() === $base);
 
-                $this->assertTrue(in_array($rate->toCurrency(), $symbols));
+                $this->assertTrue(in_array($rate->targetCurrency(), $symbols));
 
                 $this->assertTrue(property_exists($rate, 'date'));
 
@@ -120,9 +120,9 @@ class FreeCurrencyConverterApiTest extends TestCase
             foreach ($historicalExchangeRate->rates() as $rate) {
                 $this->assertTrue($rate instanceof Rate);
 
-                $this->assertTrue($rate->fromCurrency() === $base);
+                $this->assertTrue($rate->baseCurrency() === $base);
 
-                $this->assertTrue(in_array($rate->toCurrency(), $symbols));
+                $this->assertTrue(in_array($rate->targetCurrency(), $symbols));
 
                 $this->assertTrue(property_exists($rate, 'date'));
 
@@ -174,9 +174,9 @@ class FreeCurrencyConverterApiTest extends TestCase
             foreach ($timeSeriesExchangeRate->rates() as $rate) {
                 $this->assertTrue($rate instanceof Rate);
 
-                $this->assertTrue($rate->fromCurrency() === $base);
+                $this->assertTrue($rate->baseCurrency() === $base);
 
-                $this->assertTrue(in_array($rate->toCurrency(), $symbols));
+                $this->assertTrue(in_array($rate->targetCurrency(), $symbols));
 
                 $this->assertTrue(property_exists($rate, 'date'));
 
