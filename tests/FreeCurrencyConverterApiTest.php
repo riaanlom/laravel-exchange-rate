@@ -17,7 +17,7 @@ use Yoelpc4\LaravelExchangeRate\ExchangeRates\Rate;
 class FreeCurrencyConverterApiTest extends TestCase
 {
     /**
-     * Test for successful get supported currencies data.
+     * Test for successful handle supported currencies data.
      *
      * @throws GuzzleException
      * @throws SupportedCurrenciesException
@@ -46,7 +46,7 @@ class FreeCurrencyConverterApiTest extends TestCase
     }
 
     /**
-     * Test for successful get latest exchange rate data.
+     * Test for successful handle latest exchange rate data.
      *
      * @throws GuzzleException
      * @throws LatestExchangeRateException
@@ -90,7 +90,7 @@ class FreeCurrencyConverterApiTest extends TestCase
     }
 
     /**
-     * Test for successful get historical exchange rate data.
+     * Test for successful handle historical exchange rate data.
      *
      * @throws GuzzleException
      * @throws HistoricalExchangeRateException
@@ -138,7 +138,7 @@ class FreeCurrencyConverterApiTest extends TestCase
     }
 
     /**
-     * Test for successful get time series exchange rate data.
+     * Test for successful handle time series exchange rate data.
      *
      * @throws GuzzleException
      * @throws HistoricalExchangeRateException

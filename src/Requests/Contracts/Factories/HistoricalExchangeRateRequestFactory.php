@@ -8,7 +8,7 @@ use Yoelpc4\LaravelExchangeRate\Requests\Contracts\HistoricalExchangeRateRequest
 interface HistoricalExchangeRateRequestFactory
 {
     /**
-     * Create a new historical exchange rate request instance.
+     * Create a new historical exchange rate handle instance.
      *
      * @param  string  $base
      * @param  mixed  $symbols

@@ -5,28 +5,28 @@ namespace Yoelpc4\LaravelExchangeRate\Requests\Contracts;
 interface MustValidated
 {
     /**
-     * Get request's data for validation
+     * Get handle's data for validation
      *
      * @return array
      */
     public function data();
 
     /**
-     * Get request's rules for validation
+     * Get handle's rules for validation
      *
      * @return array
      */
     public function rules();
 
     /**
-     * Get request's messages for validation
+     * Get handle's messages for validation
      *
      * @return array
      */
     public function messages();
 
     /**
-     * Get request's custom attributes for validation
+     * Get handle's custom attributes for validation
      *
      * @return array
      */

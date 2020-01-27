@@ -4,7 +4,6 @@ namespace Yoelpc4\LaravelExchangeRate\Services;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use Psr\Http\Message\ResponseInterface;
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Request;
 use Yoelpc4\LaravelExchangeRate\Services\Contracts\Api;
 
@@ -26,20 +25,12 @@ class GuzzleHttpApi implements Api
     }
 
     /**
-     * Perform get request to the specified endpoint
-     *
-     * @param  Request  $request
-     * @return ResponseInterface
-     * @throws GuzzleException
+     * @inheritDoc
      */
-    public function get(Request $request)
+    public function handle(Request $request)
     {
-        $options = [
-            'query' => $request->queryParams(),
-        ];
-
         try {
-            return $this->client->request('GET', $request->uri(), $options);
+            return $this->client->request($request->method(), $request->uri(), $request->options());
         } catch (GuzzleException $e) {
             throw $e;
         }

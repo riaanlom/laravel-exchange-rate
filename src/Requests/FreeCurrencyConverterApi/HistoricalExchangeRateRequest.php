@@ -43,6 +43,14 @@ class HistoricalExchangeRateRequest implements HistoricalExchangeRateRequestCont
     /**
      * @inheritDoc
      */
+    public function method()
+    {
+        return 'GET';
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function uri()
     {
         return 'convert';
@@ -51,13 +59,15 @@ class HistoricalExchangeRateRequest implements HistoricalExchangeRateRequestCont
     /**
      * @inheritDoc
      */
-    public function queryParams()
+    public function options()
     {
         return [
-            'apiKey'  => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
-            'q'       => $this->makeQuery(),
-            'date'    => $this->date,
-            'compact' => 'ultra',
+            'query' => [
+                'apiKey'  => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
+                'q'       => $this->makeQuery(),
+                'date'    => $this->date,
+                'compact' => 'ultra',
+            ],
         ];
     }
 

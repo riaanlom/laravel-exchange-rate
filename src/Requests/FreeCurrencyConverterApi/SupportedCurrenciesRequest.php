@@ -9,6 +9,14 @@ class SupportedCurrenciesRequest implements SupportedCurrenciesRequestContract
     /**
      * @inheritDoc
      */
+    public function method()
+    {
+        return 'GET';
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function uri()
     {
         return 'currencies';
@@ -17,10 +25,12 @@ class SupportedCurrenciesRequest implements SupportedCurrenciesRequestContract
     /**
      * @inheritDoc
      */
-    public function queryParams()
+    public function options()
     {
         return [
-            'apiKey'  => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
+            'query' => [
+                'apiKey' => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
+            ],
         ];
     }
 }

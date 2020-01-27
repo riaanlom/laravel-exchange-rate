@@ -7,7 +7,7 @@ use Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi\SupportedCurre
 interface SupportedCurrenciesRequestFactory
 {
     /**
-     * Create a new supported currencies request instance.
+     * Create a new supported currencies handle instance.
      *
      * @return SupportedCurrenciesRequest
      */

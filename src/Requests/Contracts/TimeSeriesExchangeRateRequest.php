@@ -5,28 +5,28 @@ namespace Yoelpc4\LaravelExchangeRate\Requests\Contracts;
 interface TimeSeriesExchangeRateRequest extends Request
 {
     /**
-     * Get time series exchange rate request's base
+     * Get time series exchange rate handle's base
      *
      * @return string
      */
     public function base();
 
     /**
-     * Get time series exchange rate request's symbols
+     * Get time series exchange rate handle's symbols
      *
      * @return array
      */
     public function symbols();
 
     /**
-     * Get time series exchange rate request's start date
+     * Get time series exchange rate handle's start date
      *
      * @return string
      */
     public function startDate();
 
     /**
-     * Get time series exchange rate request's end date
+     * Get time series exchange rate handle's end date
      *
      * @return string
      */

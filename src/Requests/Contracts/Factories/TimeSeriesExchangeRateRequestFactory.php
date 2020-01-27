@@ -7,7 +7,7 @@ use Yoelpc4\LaravelExchangeRate\Requests\Contracts\TimeSeriesExchangeRateRequest
 interface TimeSeriesExchangeRateRequestFactory
 {
     /**
-     * Create a new time series exchange rate request instance.
+     * Create a new time series exchange rate handle instance.
      *
      * @param  string  $base
      * @param  mixed  $symbols

@@ -35,6 +35,14 @@ class LatestExchangeRateRequest implements LatestExchangeRateRequestContract, Mu
     /**
      * @inheritDoc
      */
+    public function method()
+    {
+        return 'GET';
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function uri()
     {
         return 'convert';
@@ -43,12 +51,14 @@ class LatestExchangeRateRequest implements LatestExchangeRateRequestContract, Mu
     /**
      * @inheritDoc
      */
-    public function queryParams()
+    public function options()
     {
         return [
-            'apiKey'  => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
-            'q'       => $this->makeQuery(),
-            'compact' => 'ultra',
+            'query' => [
+                'apiKey'  => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
+                'q'       => $this->makeQuery(),
+                'compact' => 'ultra',
+            ],
         ];
     }
 

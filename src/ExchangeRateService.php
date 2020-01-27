@@ -142,7 +142,7 @@ class ExchangeRateService
     }
 
     /**
-     * Validates the given request
+     * Validates the given handle
      *
      * @param  MustValidated  $request
      * @throws ValidationException

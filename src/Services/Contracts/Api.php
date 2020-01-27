@@ -9,11 +9,11 @@ use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Request;
 interface Api
 {
     /**
-     * Perform get request to the specified endpoint
+     * Handle an outgoing request.
      *
      * @param  Request  $request
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function get(Request $request);
+    public function handle(Request $request);
 }

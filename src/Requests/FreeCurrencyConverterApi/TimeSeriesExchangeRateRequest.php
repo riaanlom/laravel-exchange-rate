@@ -52,6 +52,14 @@ class TimeSeriesExchangeRateRequest implements TimeSeriesExchangeRateRequestCont
     /**
      * @inheritDoc
      */
+    public function method()
+    {
+        return 'GET';
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function uri()
     {
         return 'convert';
@@ -60,14 +68,16 @@ class TimeSeriesExchangeRateRequest implements TimeSeriesExchangeRateRequestCont
     /**
      * @inheritDoc
      */
-    public function queryParams()
+    public function options()
     {
         return [
-            'apiKey'  => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
-            'q'       => $this->makeQuery(),
-            'date'    => $this->startDate,
-            'endDate' => $this->endDate,
-            'compact' => 'ultra',
+            'query' => [
+                'apiKey'  => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
+                'q'       => $this->makeQuery(),
+                'date'    => $this->startDate,
+                'endDate' => $this->endDate,
+                'compact' => 'ultra',
+            ],
         ];
     }
 
@@ -116,11 +126,12 @@ class TimeSeriesExchangeRateRequest implements TimeSeriesExchangeRateRequestCont
             'start_date.after'  => \Lang::get('laravel-exchange-rate::validation.custom.a_year_ago', [
                 'attribute' => \Lang::get('laravel-exchange-rate::validation.attributes.start_date'),
             ]),
-            'end_date.before'   => \Lang::get('laravel-exchange-rate::validation.custom.days_period_after_or_before_tomorrow', [
-                'attribute' => \Lang::get('laravel-exchange-rate::validation.attributes.end_date'),
-                'days'      => '8',
-                'date'      => \Lang::get('laravel-exchange-rate::validation.attributes.start_date'),
-            ]),
+            'end_date.before'   => \Lang::get('laravel-exchange-rate::validation.custom.days_period_after_or_before_tomorrow',
+                [
+                    'attribute' => \Lang::get('laravel-exchange-rate::validation.attributes.end_date'),
+                    'days'      => '8',
+                    'date'      => \Lang::get('laravel-exchange-rate::validation.attributes.start_date'),
+                ]),
             'end_date.after'    => \Lang::get('validation.after', [
                 'attribute' => \Lang::get('laravel-exchange-rate::validation.attributes.end_date'),
                 'date'      => \Lang::get('laravel-exchange-rate::validation.attributes.start_date'),

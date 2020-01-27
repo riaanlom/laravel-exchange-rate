@@ -42,7 +42,7 @@ class Service implements ServiceContract
     public function supportedCurrencies(SupportedCurrenciesRequest $request)
     {
         try {
-            $response = $this->api->get($request);
+            $response = $this->api->handle($request);
 
             $statusCode = $response->getStatusCode();
 
@@ -64,7 +64,7 @@ class Service implements ServiceContract
     public function latest(LatestExchangeRateRequest $request)
     {
         try {
-            $response = $this->api->get($request);
+            $response = $this->api->handle($request);
 
             $statusCode = $response->getStatusCode();
 
@@ -86,7 +86,7 @@ class Service implements ServiceContract
     public function historical(HistoricalExchangeRateRequest $request)
     {
         try {
-            $response = $this->api->get($request);
+            $response = $this->api->handle($request);
 
             $statusCode = $response->getStatusCode();
 
@@ -108,7 +108,7 @@ class Service implements ServiceContract
     public function timeSeries(TimeSeriesExchangeRateRequest $request)
     {
         try {
-            $response = $this->api->get($request);
+            $response = $this->api->handle($request);
 
             $statusCode = $response->getStatusCode();
 
