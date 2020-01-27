@@ -5,21 +5,21 @@ namespace Yoelpc4\LaravelExchangeRate\Requests\Contracts;
 interface HistoricalExchangeRateRequest extends Request
 {
     /**
-     * Get historical exchange rate handle's base
+     * Get historical exchange rate request's base
      *
      * @return string
      */
     public function base();
 
     /**
-     * Get historical exchange rate handle's symbols
+     * Get historical exchange rate request's symbols
      *
      * @return array
      */
     public function symbols();
 
     /**
-     * Get historical exchange rate handle's date
+     * Get historical exchange rate request's date
      *
      * @return string
      */

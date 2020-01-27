@@ -5,21 +5,21 @@ namespace Yoelpc4\LaravelExchangeRate\Requests\Contracts;
 interface Request
 {
     /**
-     * Get handle's method
+     * Get request's method
      *
      * @return string
      */
     public function method();
 
     /**
-     * Get handle's uri
+     * Get request's uri
      *
      * @return string
      */
     public function uri();
 
     /**
-     * Get handle's options
+     * Get request's options
      *
      * @return array
      */
