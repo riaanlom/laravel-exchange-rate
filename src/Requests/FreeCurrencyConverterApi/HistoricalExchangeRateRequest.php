@@ -5,7 +5,7 @@ namespace Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi;
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\HistoricalExchangeRateRequest as HistoricalExchangeRateRequestContract;
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\MustValidated;
 
-class HistoricalExchangeRateRequest implements HistoricalExchangeRateRequestContract, MustValidated
+class HistoricalExchangeRateRequest extends Request implements HistoricalExchangeRateRequestContract, MustValidated
 {
     use Util;
 
@@ -33,6 +33,8 @@ class HistoricalExchangeRateRequest implements HistoricalExchangeRateRequestCont
      */
     public function __construct(string $base, $symbols, string $date)
     {
+        parent::__construct();
+
         $this->base = $base;
 
         $this->symbols = $symbols;
@@ -63,7 +65,7 @@ class HistoricalExchangeRateRequest implements HistoricalExchangeRateRequestCont
     {
         return [
             'query' => [
-                'apiKey'  => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
+                'apiKey'  => $this->apiKey,
                 'q'       => $this->makeQuery(),
                 'date'    => $this->date,
                 'compact' => 'ultra',

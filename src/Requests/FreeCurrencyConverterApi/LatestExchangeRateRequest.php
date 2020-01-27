@@ -5,7 +5,7 @@ namespace Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi;
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\LatestExchangeRateRequest as LatestExchangeRateRequestContract;
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\MustValidated;
 
-class LatestExchangeRateRequest implements LatestExchangeRateRequestContract, MustValidated
+class LatestExchangeRateRequest extends Request implements LatestExchangeRateRequestContract, MustValidated
 {
     use Util;
 
@@ -27,6 +27,8 @@ class LatestExchangeRateRequest implements LatestExchangeRateRequestContract, Mu
      */
     public function __construct(string $base, $symbols)
     {
+        parent::__construct();
+
         $this->base = $base;
 
         $this->symbols = $symbols;
@@ -55,7 +57,7 @@ class LatestExchangeRateRequest implements LatestExchangeRateRequestContract, Mu
     {
         return [
             'query' => [
-                'apiKey'  => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
+                'apiKey'  => $this->apiKey,
                 'q'       => $this->makeQuery(),
                 'compact' => 'ultra',
             ],

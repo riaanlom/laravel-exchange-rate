@@ -4,7 +4,7 @@ namespace Yoelpc4\LaravelExchangeRate\Requests\FreeCurrencyConverterApi;
 
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\SupportedCurrenciesRequest as SupportedCurrenciesRequestContract;
 
-class SupportedCurrenciesRequest implements SupportedCurrenciesRequestContract
+class SupportedCurrenciesRequest extends Request implements SupportedCurrenciesRequestContract
 {
     /**
      * @inheritDoc
@@ -29,7 +29,7 @@ class SupportedCurrenciesRequest implements SupportedCurrenciesRequestContract
     {
         return [
             'query' => [
-                'apiKey' => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
+                'apiKey'  => $this->apiKey,
             ],
         ];
     }

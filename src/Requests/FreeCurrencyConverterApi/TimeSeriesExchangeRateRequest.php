@@ -6,7 +6,7 @@ use Illuminate\Support\Carbon;
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\MustValidated;
 use Yoelpc4\LaravelExchangeRate\Requests\Contracts\TimeSeriesExchangeRateRequest as TimeSeriesExchangeRateRequestContract;
 
-class TimeSeriesExchangeRateRequest implements TimeSeriesExchangeRateRequestContract, MustValidated
+class TimeSeriesExchangeRateRequest extends Request implements TimeSeriesExchangeRateRequestContract, MustValidated
 {
     use Util;
 
@@ -40,6 +40,8 @@ class TimeSeriesExchangeRateRequest implements TimeSeriesExchangeRateRequestCont
      */
     public function __construct(string $base, $symbols, string $startDate, string $endDate)
     {
+        parent::__construct();
+
         $this->base = $base;
 
         $this->symbols = $symbols;
@@ -72,7 +74,7 @@ class TimeSeriesExchangeRateRequest implements TimeSeriesExchangeRateRequestCont
     {
         return [
             'query' => [
-                'apiKey'  => \Config::get('exchange-rate.providers.free_currency_converter_api.api_key'),
+                'apiKey'  => $this->apiKey,
                 'q'       => $this->makeQuery(),
                 'date'    => $this->startDate,
                 'endDate' => $this->endDate,
