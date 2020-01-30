@@ -34,7 +34,6 @@ class ExchangeRateService
      *
      * @return \Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\SupportedCurrencies
      * @throws \GuzzleHttp\Exception\RequestException
-     * @throws \Yoelpc4\LaravelExchangeRate\Exceptions\SupportedCurrenciesException
      */
     public function supportedCurrencies()
     {
