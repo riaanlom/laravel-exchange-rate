@@ -53,14 +53,12 @@ Get the supported currencies data via syntax:
 ```php
 try {
     $supportedCurrencies = \ExchangeRateService::supportedCurrencies();
-} catch (\GuzzleHttp\Exception\GuzzleException $e) {
-    throw $e;
-} catch (\Yoelpc4\LaravelExchangeRate\Exceptions\SupportedCurrenciesException $e) {
+} catch (\GuzzleHttp\Exception\RequestException $e) {
     throw $e;
 }
 ```
 
-The return value always instance of `\Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\SupportedCurrencies`.
+The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\SupportedCurrencies`.
 
 ## Latest Exchange Rate
 
@@ -75,16 +73,14 @@ try {
     ];
     
     $latestExchangeRate = \ExchangeRateService::latest($base, $symbols);
-} catch (\GuzzleHttp\Exception\GuzzleException $e) {
+} catch (\GuzzleHttp\Exception\RequestException $e) {
     throw $e;
 } catch (\Illuminate\Validation\ValidationException $e) {
-    throw $e;
-} catch (\Yoelpc4\LaravelExchangeRate\Exceptions\LatestExchangeRateException $e) {
     throw $e;
 }
 ```
 
-The return value always instance of `\Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\LatestExchangeRate`.
+The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\LatestExchangeRate`.
 
 ## Historical Exchange Rate
 
@@ -101,16 +97,14 @@ try {
     $date = now()->subDays(3)->toDateString();
     
     $historicalExchangeRate = \ExchangeRateService::latest($base, $symbols, $date);
-} catch (\GuzzleHttp\Exception\GuzzleException $e) {
+} catch (\GuzzleHttp\Exception\RequestException $e) {
     throw $e;
 } catch (\Illuminate\Validation\ValidationException $e) {
-    throw $e;
-} catch (\Yoelpc4\LaravelExchangeRate\Exceptions\HistoricalExchangeRateException $e) {
     throw $e;
 }
 ```
 
-The return value always instance of `\Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\HistoricalExchangeRate`.
+The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\HistoricalExchangeRate`.
 
 ## Time Series Exchange Rate
 
@@ -129,16 +123,14 @@ try {
     $endDate = now()->toDateString();
     
     $timeSeriesExchangeRate = \ExchangeRateService::timeSeries($base, $symbols, $startDate, $endDate);
-} catch (\GuzzleHttp\Exception\GuzzleException $e) {
+} catch (\GuzzleHttp\Exception\RequestException $e) {
     throw $e;
 } catch (\Illuminate\Validation\ValidationException $e) {
-    throw $e;
-} catch (\Yoelpc4\LaravelExchangeRate\Exceptions\TimeSeriesExchangeRateException $e) {
     throw $e;
 }
 ```
 
-The return value always instance of `\Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\TimeSeriesExchangeRate`.
+The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\TimeSeriesExchangeRate`.
 
 ## Side Note
 

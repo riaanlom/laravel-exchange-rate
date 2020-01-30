@@ -32,7 +32,7 @@ class ExchangeRateService
     /**
      * Get the supported currencies data
      *
-     * @return \Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\SupportedCurrencies
+     * @return \Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\SupportedCurrencies
      * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Yoelpc4\LaravelExchangeRate\Exceptions\SupportedCurrenciesException
      */
@@ -52,7 +52,7 @@ class ExchangeRateService
      *
      * @param  string  $base
      * @param  mixed  $symbols
-     * @return \Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\LatestExchangeRate
+     * @return \Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\LatestExchangeRate
      * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -80,7 +80,7 @@ class ExchangeRateService
      * @param  string  $base
      * @param  mixed  $symbols
      * @param  string  $date
-     * @return \Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\HistoricalExchangeRate
+     * @return \Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\HistoricalExchangeRate
      * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -109,7 +109,7 @@ class ExchangeRateService
      * @param  mixed  $symbols
      * @param  string  $startDate
      * @param  string  $endDate
-     * @return \Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\TimeSeriesExchangeRate
+     * @return \Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\TimeSeriesExchangeRate
      * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Illuminate\Validation\ValidationException
      */
