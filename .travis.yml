@@ -17,6 +17,7 @@ install:
   - if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-source --no-interaction --prefer-lowest --prefer-stable; fi
 
 script:
+  - composer validate
   - vendor/bin/phpunit
   - php coverage-checker.php coverage.xml 70
   - curl --data-binary @codecov.yml https://codecov.io/validate
