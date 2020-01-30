@@ -2,8 +2,8 @@
 
 namespace Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi;
 
-use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\SupportedCurrencies as SupportedCurrenciesContract;
-use Yoelpc4\LaravelExchangeRate\ExchangeRates\Currency;
+use Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\SupportedCurrencies as SupportedCurrenciesContract;
+use Yoelpc4\LaravelExchangeRate\Currency;
 
 class SupportedCurrencies implements SupportedCurrenciesContract
 {

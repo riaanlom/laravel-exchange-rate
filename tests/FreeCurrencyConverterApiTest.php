@@ -2,25 +2,21 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Tests;
 
-use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Validation\ValidationException;
-use Yoelpc4\LaravelExchangeRate\Exceptions\HistoricalExchangeRateException;
-use Yoelpc4\LaravelExchangeRate\Exceptions\LatestExchangeRateException;
-use Yoelpc4\LaravelExchangeRate\Exceptions\SupportedCurrenciesException;
-use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\HistoricalExchangeRate;
-use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\LatestExchangeRate;
-use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\SupportedCurrencies;
-use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\TimeSeriesExchangeRate;
-use Yoelpc4\LaravelExchangeRate\ExchangeRates\Currency;
-use Yoelpc4\LaravelExchangeRate\ExchangeRates\Rate;
+use Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\HistoricalExchangeRate;
+use Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\LatestExchangeRate;
+use Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\SupportedCurrencies;
+use Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\TimeSeriesExchangeRate;
+use Yoelpc4\LaravelExchangeRate\Currency;
+use Yoelpc4\LaravelExchangeRate\Rate;
 
 class FreeCurrencyConverterApiTest extends TestCase
 {
     /**
-     * Test for successful handle supported currencies data.
+     * Test for successful get supported currencies data.
      *
-     * @throws GuzzleException
-     * @throws SupportedCurrenciesException
+     * @throws RequestException
      */
     public function testSuccessfulSupportedCurrencies()
     {
@@ -38,18 +34,15 @@ class FreeCurrencyConverterApiTest extends TestCase
 
                 $this->assertTrue(property_exists($currency, 'symbol'));
             }
-        } catch (GuzzleException $e) {
-            throw $e;
-        } catch (SupportedCurrenciesException $e) {
+        } catch (RequestException $e) {
             throw $e;
         }
     }
 
     /**
-     * Test for successful handle latest exchange rate data.
+     * Test for successful get latest exchange rate data.
      *
-     * @throws GuzzleException
-     * @throws LatestExchangeRateException
+     * @throws RequestException
      * @throws ValidationException
      */
     public function testSuccessfulLatestExchangeRate()
@@ -80,20 +73,17 @@ class FreeCurrencyConverterApiTest extends TestCase
 
                 $this->assertTrue(property_exists($rate, 'value'));
             }
-        } catch (GuzzleException $e) {
+        } catch (RequestException $e) {
             throw $e;
         } catch (ValidationException $e) {
-            throw $e;
-        } catch (LatestExchangeRateException $e) {
             throw $e;
         }
     }
 
     /**
-     * Test for successful handle historical exchange rate data.
+     * Test for successful get historical exchange rate data.
      *
-     * @throws GuzzleException
-     * @throws HistoricalExchangeRateException
+     * @throws RequestException
      * @throws ValidationException
      */
     public function testSuccessfulHistoricalExchangeRate()
@@ -128,20 +118,17 @@ class FreeCurrencyConverterApiTest extends TestCase
 
                 $this->assertTrue(property_exists($rate, 'value'));
             }
-        } catch (GuzzleException $e) {
+        } catch (RequestException $e) {
             throw $e;
         } catch (ValidationException $e) {
-            throw $e;
-        } catch (HistoricalExchangeRateException $e) {
             throw $e;
         }
     }
 
     /**
-     * Test for successful handle time series exchange rate data.
+     * Test for successful get time series exchange rate data.
      *
-     * @throws GuzzleException
-     * @throws HistoricalExchangeRateException
+     * @throws RequestException
      * @throws ValidationException
      */
     public function testSuccessfulTimeSeriesExchangeRate()
@@ -184,11 +171,9 @@ class FreeCurrencyConverterApiTest extends TestCase
             }
 
             $this->assertTrue(count($timeSeriesExchangeRate->rates()) === (count($symbols) * ($dayDiff + 1)));
-        } catch (GuzzleException $e) {
+        } catch (RequestException $e) {
             throw $e;
         } catch (ValidationException $e) {
-            throw $e;
-        } catch (HistoricalExchangeRateException $e) {
             throw $e;
         }
     }

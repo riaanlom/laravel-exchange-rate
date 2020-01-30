@@ -2,8 +2,8 @@
 
 namespace Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi;
 
-use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\LatestExchangeRate as LatestExchangeRateContract;
-use Yoelpc4\LaravelExchangeRate\ExchangeRates\Rate;
+use Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\LatestExchangeRate as LatestExchangeRateContract;
+use Yoelpc4\LaravelExchangeRate\Rate;
 
 class LatestExchangeRate extends ExchangeRate implements LatestExchangeRateContract
 {

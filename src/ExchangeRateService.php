@@ -2,19 +2,15 @@
 
 namespace Yoelpc4\LaravelExchangeRate;
 
-use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Validation\ValidationException;
-use Yoelpc4\LaravelExchangeRate\Exceptions\HistoricalExchangeRateException;
-use Yoelpc4\LaravelExchangeRate\Exceptions\LatestExchangeRateException;
-use Yoelpc4\LaravelExchangeRate\Exceptions\SupportedCurrenciesException;
-use Yoelpc4\LaravelExchangeRate\Exceptions\TimeSeriesExchangeRateException;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\HistoricalExchangeRateRequestFactory;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\LatestExchangeRateRequestFactory;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\SupportedCurrenciesRequestFactory;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\Factories\TimeSeriesExchangeRateRequestFactory;
-use Yoelpc4\LaravelExchangeRate\Requests\Contracts\MustValidated;
-use Yoelpc4\LaravelExchangeRate\Services\Contracts\Service;
+use Yoelpc4\LaravelExchangeRate\Contracts\Requests\HistoricalExchangeRateRequestFactory;
+use Yoelpc4\LaravelExchangeRate\Contracts\Requests\LatestExchangeRateRequestFactory;
+use Yoelpc4\LaravelExchangeRate\Contracts\Requests\MustValidated;
+use Yoelpc4\LaravelExchangeRate\Contracts\Requests\SupportedCurrenciesRequest;
+use Yoelpc4\LaravelExchangeRate\Contracts\Requests\TimeSeriesExchangeRateRequestFactory;
+use Yoelpc4\LaravelExchangeRate\Contracts\Services\Service;
 
 class ExchangeRateService
 {
@@ -25,45 +21,45 @@ class ExchangeRateService
 
     /**
      * ExchangeRateService constructor.
+     *
+     * @param  Service  $service
      */
-    public function __construct()
+    public function __construct(Service $service)
     {
-        $this->service = \App::make(Service::class);
+        $this->service = $service;
     }
 
     /**
      * Get the supported currencies data
      *
      * @return \Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\SupportedCurrencies
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Yoelpc4\LaravelExchangeRate\Exceptions\SupportedCurrenciesException
      */
     public function supportedCurrencies()
     {
-        $request = \App::make(SupportedCurrenciesRequestFactory::class)->make();
+        $request = \App::make(SupportedCurrenciesRequest::class);
 
         try {
             return $this->service->supportedCurrencies($request);
-        } catch (GuzzleException $e) {
-            throw $e;
-        } catch (SupportedCurrenciesException $e) {
+        } catch (RequestException $e) {
             throw $e;
         }
     }
 
     /**
-     * Get the latest exchange rate data
+     *
      *
      * @param  string  $base
      * @param  mixed  $symbols
      * @return \Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\LatestExchangeRate
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Yoelpc4\LaravelExchangeRate\Exceptions\LatestExchangeRateException
+     * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Illuminate\Validation\ValidationException
      */
     public function latest(string $base, $symbols)
     {
-        $request = \App::make(LatestExchangeRateRequestFactory::class)->make($base, $symbols);
+        $request = \App::make(LatestExchangeRateRequestFactory::class)
+            ->make($base, $symbols);
 
         try {
             $this->validate($request);
@@ -73,9 +69,7 @@ class ExchangeRateService
 
         try {
             return $this->service->latest($request);
-        } catch (GuzzleException $e) {
-            throw $e;
-        } catch (LatestExchangeRateException $e) {
+        } catch (RequestException $e) {
             throw $e;
         }
     }
@@ -87,13 +81,13 @@ class ExchangeRateService
      * @param  mixed  $symbols
      * @param  string  $date
      * @return \Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\HistoricalExchangeRate
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Yoelpc4\LaravelExchangeRate\Exceptions\HistoricalExchangeRateException
+     * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Illuminate\Validation\ValidationException
      */
     public function historical(string $base, $symbols, string $date)
     {
-        $request = \App::make(HistoricalExchangeRateRequestFactory::class)->make($base, $symbols, $date);
+        $request = \App::make(HistoricalExchangeRateRequestFactory::class)
+            ->make($base, $symbols, $date);
 
         try {
             $this->validate($request);
@@ -103,9 +97,7 @@ class ExchangeRateService
 
         try {
             return $this->service->historical($request);
-        } catch (GuzzleException $e) {
-            throw $e;
-        } catch (HistoricalExchangeRateException $e) {
+        } catch (RequestException $e) {
             throw $e;
         }
     }
@@ -118,13 +110,13 @@ class ExchangeRateService
      * @param  string  $startDate
      * @param  string  $endDate
      * @return \Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\TimeSeriesExchangeRate
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Illuminate\Validation\ValidationException
-     * @throws \Yoelpc4\LaravelExchangeRate\Exceptions\TimeSeriesExchangeRateException
      */
     public function timeSeries(string $base, $symbols, string $startDate, string $endDate)
     {
-        $request = \App::make(TimeSeriesExchangeRateRequestFactory::class)->make($base, $symbols, $startDate, $endDate);
+        $request = \App::make(TimeSeriesExchangeRateRequestFactory::class)
+            ->make($base, $symbols, $startDate, $endDate);
 
         try {
             $this->validate($request);
@@ -134,15 +126,13 @@ class ExchangeRateService
 
         try {
             return $this->service->timeSeries($request);
-        } catch (GuzzleException $e) {
-            throw $e;
-        } catch (TimeSeriesExchangeRateException $e) {
+        } catch (RequestException $e) {
             throw $e;
         }
     }
 
     /**
-     * Validates the given handle
+     * Validates the given request
      *
      * @param  MustValidated  $request
      * @throws ValidationException

@@ -2,8 +2,8 @@
 
 namespace Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi;
 
-use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\HistoricalExchangeRate as HistoricalExchangeRateContract;
-use Yoelpc4\LaravelExchangeRate\ExchangeRates\Rate;
+use Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\HistoricalExchangeRate as HistoricalExchangeRateContract;
+use Yoelpc4\LaravelExchangeRate\Rate;
 
 class HistoricalExchangeRate extends ExchangeRate implements HistoricalExchangeRateContract
 {

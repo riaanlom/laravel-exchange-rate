@@ -2,8 +2,8 @@
 
 namespace Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi;
 
-use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\TimeSeriesExchangeRate as TimeSeriesExchangeRateContract;
-use Yoelpc4\LaravelExchangeRate\ExchangeRates\Rate;
+use Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\TimeSeriesExchangeRate as TimeSeriesExchangeRateContract;
+use Yoelpc4\LaravelExchangeRate\Rate;
 
 class TimeSeriesExchangeRate extends ExchangeRate implements TimeSeriesExchangeRateContract
 {

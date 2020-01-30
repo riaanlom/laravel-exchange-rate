@@ -2,10 +2,9 @@
 
 namespace Yoelpc4\LaravelExchangeRate\ExchangeRates\FreeCurrencyConverterApi;
 
-use Yoelpc4\LaravelExchangeRate\ExchangeRates\Contracts\ExchangeRate as ExchangeRateContract;
-use Yoelpc4\LaravelExchangeRate\ExchangeRates\Rate;
+use Yoelpc4\LaravelExchangeRate\Rate;
 
-abstract class ExchangeRate implements ExchangeRateContract
+abstract class ExchangeRate
 {
     /**
      * @var string
