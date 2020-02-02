@@ -47,7 +47,7 @@ class ExchangeRateService
     }
 
     /**
-     *
+     * Get the latest exchange rate data
      *
      * @param  string  $base
      * @param  mixed  $symbols

@@ -73,9 +73,9 @@ try {
     ];
     
     $latestExchangeRate = \ExchangeRateService::latest($base, $symbols);
-} catch (\GuzzleHttp\Exception\RequestException $e) {
-    throw $e;
 } catch (\Illuminate\Validation\ValidationException $e) {
+    throw $e;
+} catch (\GuzzleHttp\Exception\RequestException $e) {
     throw $e;
 }
 ```
@@ -97,9 +97,9 @@ try {
     $date = now()->subDays(3)->toDateString();
     
     $historicalExchangeRate = \ExchangeRateService::latest($base, $symbols, $date);
-} catch (\GuzzleHttp\Exception\RequestException $e) {
-    throw $e;
 } catch (\Illuminate\Validation\ValidationException $e) {
+    throw $e;
+} catch (\GuzzleHttp\Exception\RequestException $e) {
     throw $e;
 }
 ```
@@ -123,9 +123,9 @@ try {
     $endDate = now()->toDateString();
     
     $timeSeriesExchangeRate = \ExchangeRateService::timeSeries($base, $symbols, $startDate, $endDate);
-} catch (\GuzzleHttp\Exception\RequestException $e) {
-    throw $e;
 } catch (\Illuminate\Validation\ValidationException $e) {
+    throw $e;
+} catch (\GuzzleHttp\Exception\RequestException $e) {
     throw $e;
 }
 ```
