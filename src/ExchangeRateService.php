@@ -5,12 +5,12 @@ namespace Yoelpc4\LaravelExchangeRate;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Validation\ValidationException;
-use Yoelpc4\LaravelExchangeRate\Contracts\Requests\HistoricalExchangeRateRequestFactory;
-use Yoelpc4\LaravelExchangeRate\Contracts\Requests\LatestExchangeRateRequestFactory;
-use Yoelpc4\LaravelExchangeRate\Contracts\Requests\MustValidated;
-use Yoelpc4\LaravelExchangeRate\Contracts\Requests\SupportedCurrenciesRequest;
-use Yoelpc4\LaravelExchangeRate\Contracts\Requests\TimeSeriesExchangeRateRequestFactory;
-use Yoelpc4\LaravelExchangeRate\Contracts\Services\Service;
+use Yoelpc4\LaravelExchangeRate\Contracts\MustValidated;
+use Yoelpc4\LaravelExchangeRate\Contracts\Service;
+use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesRequestContract;
+use Yoelpc4\LaravelExchangeRate\HistoricalExchangeRate\FreeCurrencyConverterApi\HistoricalExchangeRateFactory;
+use Yoelpc4\LaravelExchangeRate\LatestExchangeRate\FreeCurrencyConverterApi\LatestExchangeRateFactory;
+use Yoelpc4\LaravelExchangeRate\TimeSeriesExchangeRate\FreeCurrencyConverterApi\TimeSeriesExchangeRateFactory;
 
 class ExchangeRateService
 {
@@ -32,12 +32,12 @@ class ExchangeRateService
     /**
      * Get the supported currencies data
      *
-     * @return \Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\SupportedCurrencies
+     * @return Contracts\SupportedCurrencies\SupportedCurrenciesResponseContract
      * @throws \GuzzleHttp\Exception\RequestException
      */
     public function supportedCurrencies()
     {
-        $request = \App::make(SupportedCurrenciesRequest::class);
+        $request = \App::make(SupportedCurrenciesRequestContract::class);
 
         try {
             return $this->service->supportedCurrencies($request);
@@ -51,14 +51,13 @@ class ExchangeRateService
      *
      * @param  string  $base
      * @param  mixed  $symbols
-     * @return \Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\LatestExchangeRate
+     * @return Contracts\LatestExchangeRate\LatestExchangeRateResponseContract
      * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Illuminate\Validation\ValidationException
      */
     public function latest(string $base, $symbols)
     {
-        $request = \App::make(LatestExchangeRateRequestFactory::class)
-            ->make($base, $symbols);
+        $request = \App::make(LatestExchangeRateFactory::class)->makeRequest($base, $symbols);
 
         try {
             $this->validate($request);
@@ -79,14 +78,13 @@ class ExchangeRateService
      * @param  string  $base
      * @param  mixed  $symbols
      * @param  string  $date
-     * @return \Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\HistoricalExchangeRate
+     * @return Contracts\HistoricalExchangeRate\HistoricalExchangeRateResponseContract
      * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Illuminate\Validation\ValidationException
      */
     public function historical(string $base, $symbols, string $date)
     {
-        $request = \App::make(HistoricalExchangeRateRequestFactory::class)
-            ->make($base, $symbols, $date);
+        $request = \App::make(HistoricalExchangeRateFactory::class)->makeRequest($base, $symbols, $date);
 
         try {
             $this->validate($request);
@@ -108,14 +106,13 @@ class ExchangeRateService
      * @param  mixed  $symbols
      * @param  string  $startDate
      * @param  string  $endDate
-     * @return \Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\TimeSeriesExchangeRate
+     * @return Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateResponseContract
      * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Illuminate\Validation\ValidationException
      */
     public function timeSeries(string $base, $symbols, string $startDate, string $endDate)
     {
-        $request = \App::make(TimeSeriesExchangeRateRequestFactory::class)
-            ->make($base, $symbols, $startDate, $endDate);
+        $request = \App::make(TimeSeriesExchangeRateFactory::class)->makeRequest($base, $symbols, $startDate, $endDate);
 
         try {
             $this->validate($request);

@@ -4,10 +4,10 @@ namespace Yoelpc4\LaravelExchangeRate\Tests;
 
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Validation\ValidationException;
-use Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\HistoricalExchangeRate;
-use Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\LatestExchangeRate;
-use Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\SupportedCurrencies;
-use Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\TimeSeriesExchangeRate;
+use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateResponseContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateResponseContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesResponseContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateResponseContract;
 use Yoelpc4\LaravelExchangeRate\Currency;
 use Yoelpc4\LaravelExchangeRate\Rate;
 
@@ -23,7 +23,7 @@ class FreeCurrencyConverterApiTest extends TestCase
         try {
             $supportedCurrencies = \ExchangeRateService::supportedCurrencies();
 
-            $this->assertTrue($supportedCurrencies instanceof SupportedCurrencies);
+            $this->assertTrue($supportedCurrencies instanceof SupportedCurrenciesResponseContract);
 
             $this->assertTrue(property_exists($supportedCurrencies, 'currencies'));
 
@@ -56,7 +56,7 @@ class FreeCurrencyConverterApiTest extends TestCase
         try {
             $latestExchangeRate = \ExchangeRateService::latest($base, $symbols);
 
-            $this->assertTrue($latestExchangeRate instanceof LatestExchangeRate);
+            $this->assertTrue($latestExchangeRate instanceof LatestExchangeRateResponseContract);
 
             $this->assertTrue($latestExchangeRate->base() === $base);
 
@@ -73,9 +73,9 @@ class FreeCurrencyConverterApiTest extends TestCase
 
                 $this->assertTrue(property_exists($rate, 'value'));
             }
-        } catch (RequestException $e) {
-            throw $e;
         } catch (ValidationException $e) {
+            throw $e;
+        } catch (RequestException $e) {
             throw $e;
         }
     }
@@ -99,7 +99,7 @@ class FreeCurrencyConverterApiTest extends TestCase
         try {
             $historicalExchangeRate = \ExchangeRateService::historical($base, $symbols, $date);
 
-            $this->assertTrue($historicalExchangeRate instanceof HistoricalExchangeRate);
+            $this->assertTrue($historicalExchangeRate instanceof HistoricalExchangeRateResponseContract);
 
             $this->assertTrue($historicalExchangeRate->base() === $base);
 
@@ -118,9 +118,9 @@ class FreeCurrencyConverterApiTest extends TestCase
 
                 $this->assertTrue(property_exists($rate, 'value'));
             }
-        } catch (RequestException $e) {
-            throw $e;
         } catch (ValidationException $e) {
+            throw $e;
+        } catch (RequestException $e) {
             throw $e;
         }
     }
@@ -148,7 +148,7 @@ class FreeCurrencyConverterApiTest extends TestCase
         try {
             $timeSeriesExchangeRate = \ExchangeRateService::timeSeries($base, $symbols, $startDate, $endDate);
 
-            $this->assertTrue($timeSeriesExchangeRate instanceof TimeSeriesExchangeRate);
+            $this->assertTrue($timeSeriesExchangeRate instanceof TimeSeriesExchangeRateResponseContract);
 
             $this->assertTrue($timeSeriesExchangeRate->base() === $base);
 
@@ -171,9 +171,9 @@ class FreeCurrencyConverterApiTest extends TestCase
             }
 
             $this->assertTrue(count($timeSeriesExchangeRate->rates()) === (count($symbols) * ($dayDiff + 1)));
-        } catch (RequestException $e) {
-            throw $e;
         } catch (ValidationException $e) {
+            throw $e;
+        } catch (RequestException $e) {
             throw $e;
         }
     }
