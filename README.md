@@ -58,7 +58,7 @@ try {
 }
 ```
 
-The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\SupportedCurrencies`.
+The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesResponseContract`.
 
 ## Latest Exchange Rate
 
@@ -80,7 +80,7 @@ try {
 }
 ```
 
-The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\LatestExchangeRate`.
+The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateResponseContract`.
 
 ## Historical Exchange Rate
 
@@ -104,7 +104,7 @@ try {
 }
 ```
 
-The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\HistoricalExchangeRate`.
+The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateResponseContract`.
 
 ## Time Series Exchange Rate
 
@@ -130,11 +130,11 @@ try {
 }
 ```
 
-The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRates\TimeSeriesExchangeRate`.
+The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateResponseContract`.
 
 ## Side Note
 
-This package will run validation based on respective provider rules before sending some requests to the provider,
+This package will run validation based on respective provider rules before dispatching some requests,
 therefore it will throw `\Illuminate\Validation\ValidationException` for every unmet validation rules.
 
 ## License
