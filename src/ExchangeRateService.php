@@ -3,7 +3,6 @@
 namespace Yoelpc4\LaravelExchangeRate;
 
 use GuzzleHttp\Exception\RequestException;
-use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Validation\ValidationException;
 use Yoelpc4\LaravelExchangeRate\Contracts\MustValidated;
 use Yoelpc4\LaravelExchangeRate\Contracts\Service;
@@ -144,7 +143,7 @@ class ExchangeRateService
         $customAttributes = $request->customAttributes();
 
         try {
-            \App::make(Factory::class)->make($data, $rules, $messages, $customAttributes)->validate();
+            \Validator::make($data, $rules, $messages, $customAttributes)->validate();
         } catch (ValidationException $e) {
             throw $e;
         }
