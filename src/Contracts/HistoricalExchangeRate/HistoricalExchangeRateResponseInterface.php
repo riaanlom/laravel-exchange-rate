@@ -2,9 +2,9 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate;
 
-use Yoelpc4\LaravelExchangeRate\Contracts\Base\BaseResponseContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\Base\BaseResponseInterface;
 
-interface HistoricalExchangeRateResponseContract extends BaseResponseContract
+interface HistoricalExchangeRateResponseInterface extends BaseResponseInterface
 {
     /**
      * Get historical exchange rate response's date

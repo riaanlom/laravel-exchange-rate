@@ -3,22 +3,22 @@
 namespace Yoelpc4\LaravelExchangeRate\Services\FreeCurrencyConverterApi;
 
 use GuzzleHttp\Exception\RequestException;
-use Yoelpc4\LaravelExchangeRate\Contracts\Apis\ApiContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\Apis\ApiFactoryContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateFactoryContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateRequestContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateFactoryContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateRequestContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\Service;
-use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesFactoryContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesRequestContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateFactoryContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateRequestContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\Api\ApiInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\Api\ApiFactoryInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateFactoryInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateRequestInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateFactoryInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateRequestInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\ServiceInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesFactoryInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesRequestInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateFactoryInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateRequestInterface;
 
-class FreeCurrencyConverterApiService implements Service
+class FreeCurrencyConverterApiService implements ServiceInterface
 {
     /**
-     * @var ApiContract
+     * @var ApiInterface
      */
     protected $api;
 
@@ -27,19 +27,19 @@ class FreeCurrencyConverterApiService implements Service
      */
     public function __construct()
     {
-        $this->api = \App::make(ApiFactoryContract::class)
+        $this->api = \App::make(ApiFactoryInterface::class)
             ->make(\Config::get('exchange-rate.providers.free_currency_converter_api.base_url'));
     }
 
     /**
      * @inheritDoc
      */
-    public function supportedCurrencies(SupportedCurrenciesRequestContract $request)
+    public function supportedCurrencies(SupportedCurrenciesRequestInterface $request)
     {
         try {
             $response = $this->api->handle($request);
 
-            return \App::make(SupportedCurrenciesFactoryContract::class)
+            return \App::make(SupportedCurrenciesFactoryInterface::class)
                 ->makeResponse($response->getBody()->getContents());
         } catch (RequestException $e) {
             throw $e;
@@ -49,12 +49,12 @@ class FreeCurrencyConverterApiService implements Service
     /**
      * @inheritDoc
      */
-    public function latest(LatestExchangeRateRequestContract $request)
+    public function latest(LatestExchangeRateRequestInterface $request)
     {
         try {
             $response = $this->api->handle($request);
 
-            return \App::make(LatestExchangeRateFactoryContract::class)
+            return \App::make(LatestExchangeRateFactoryInterface::class)
                 ->makeResponse($request, $response->getBody()->getContents());
         } catch (RequestException $e) {
             throw $e;
@@ -64,12 +64,12 @@ class FreeCurrencyConverterApiService implements Service
     /**
      * @inheritDoc
      */
-    public function historical(HistoricalExchangeRateRequestContract $request)
+    public function historical(HistoricalExchangeRateRequestInterface $request)
     {
         try {
             $response = $this->api->handle($request);
 
-            return \App::make(HistoricalExchangeRateFactoryContract::class)
+            return \App::make(HistoricalExchangeRateFactoryInterface::class)
                 ->makeResponse($request, $response->getBody()->getContents());
         } catch (RequestException $e) {
             throw $e;
@@ -79,12 +79,12 @@ class FreeCurrencyConverterApiService implements Service
     /**
      * @inheritDoc
      */
-    public function timeSeries(TimeSeriesExchangeRateRequestContract $request)
+    public function timeSeries(TimeSeriesExchangeRateRequestInterface $request)
     {
         try {
             $response = $this->api->handle($request);
 
-            return \App::make(TimeSeriesExchangeRateFactoryContract::class)
+            return \App::make(TimeSeriesExchangeRateFactoryInterface::class)
                 ->makeResponse($request, $response->getBody()->getContents());
         } catch (RequestException $e) {
             throw $e;

@@ -3,11 +3,11 @@
 namespace Yoelpc4\LaravelExchangeRate\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Yoelpc4\LaravelExchangeRate\Apis\Api;
-use Yoelpc4\LaravelExchangeRate\Apis\Guzzle\ApiFactory;
-use Yoelpc4\LaravelExchangeRate\Contracts\Apis\ApiContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\Apis\ApiFactoryContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\Service;
+use Yoelpc4\LaravelExchangeRate\Apis\GuzzleHttp\Api;
+use Yoelpc4\LaravelExchangeRate\Apis\GuzzleHttp\ApiFactory;
+use Yoelpc4\LaravelExchangeRate\Contracts\Api\ApiInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\Api\ApiFactoryInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\ServiceInterface;
 use Yoelpc4\LaravelExchangeRate\ExchangeRateService;
 
 class ExchangeRateServiceProvider extends ServiceProvider
@@ -35,7 +35,7 @@ class ExchangeRateServiceProvider extends ServiceProvider
         $this->registerThirdPartyServiceProvider();
 
         $this->app->singleton('exchange_rate_service', function () {
-            return new ExchangeRateService($this->app->make(Service::class));
+            return new ExchangeRateService($this->app->make(ServiceInterface::class));
         });
     }
 
@@ -64,9 +64,9 @@ class ExchangeRateServiceProvider extends ServiceProvider
      */
     protected function registerApi()
     {
-        $this->app->singleton(ApiFactoryContract::class, ApiFactory::class);
+        $this->app->singleton(ApiFactoryInterface::class, ApiFactory::class);
 
-        $this->app->singleton(ApiContract::class, Api::class);
+        $this->app->singleton(ApiInterface::class, Api::class);
     }
 
     /**

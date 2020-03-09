@@ -3,19 +3,19 @@
 namespace Yoelpc4\LaravelExchangeRate\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateFactoryContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateRequestContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateResponseContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateFactoryContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateRequestContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateResponseContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\Service;
-use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesFactoryContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesRequestContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateFactoryInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateRequestInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateResponseInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateFactoryInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateRequestInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateResponseInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\ServiceInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesFactoryInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesRequestInterface;
 use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesResponseContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateFactoryContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateRequestContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateResponseContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateFactoryInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateRequestInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateResponseInterface;
 use Yoelpc4\LaravelExchangeRate\HistoricalExchangeRate\FreeCurrencyConverterApi\HistoricalExchangeRateFactory;
 use Yoelpc4\LaravelExchangeRate\HistoricalExchangeRate\FreeCurrencyConverterApi\HistoricalExchangeRateRequest;
 use Yoelpc4\LaravelExchangeRate\HistoricalExchangeRate\FreeCurrencyConverterApi\HistoricalExchangeRateResponse;
@@ -40,26 +40,26 @@ class FreeCurrencyConverterApiServiceProvider extends ServiceProvider
     public function register()
     {
         // service
-        $this->app->singleton(Service::class, FreeCurrencyConverterApiService::class);
+        $this->app->singleton(ServiceInterface::class, FreeCurrencyConverterApiService::class);
 
         // supported currencies
-        $this->app->bind(SupportedCurrenciesFactoryContract::class, SupportedCurrenciesFactory::class);
-        $this->app->bind(SupportedCurrenciesRequestContract::class, SupportedCurrenciesRequest::class);
+        $this->app->bind(SupportedCurrenciesFactoryInterface::class, SupportedCurrenciesFactory::class);
+        $this->app->bind(SupportedCurrenciesRequestInterface::class, SupportedCurrenciesRequest::class);
         $this->app->bind(SupportedCurrenciesResponseContract::class, SupportedCurrenciesResponse::class);
 
         // latest exchange rate
-        $this->app->bind(LatestExchangeRateFactoryContract::class, LatestExchangeRateFactory::class);
-        $this->app->bind(LatestExchangeRateRequestContract::class, LatestExchangeRateRequest::class);
-        $this->app->bind(LatestExchangeRateResponseContract::class, LatestExchangeRateResponse::class);
+        $this->app->bind(LatestExchangeRateFactoryInterface::class, LatestExchangeRateFactory::class);
+        $this->app->bind(LatestExchangeRateRequestInterface::class, LatestExchangeRateRequest::class);
+        $this->app->bind(LatestExchangeRateResponseInterface::class, LatestExchangeRateResponse::class);
 
         // historical exchange rate
-        $this->app->bind(HistoricalExchangeRateFactoryContract::class, HistoricalExchangeRateFactory::class);
-        $this->app->bind(HistoricalExchangeRateRequestContract::class, HistoricalExchangeRateRequest::class);
-        $this->app->bind(HistoricalExchangeRateResponseContract::class, HistoricalExchangeRateResponse::class);
+        $this->app->bind(HistoricalExchangeRateFactoryInterface::class, HistoricalExchangeRateFactory::class);
+        $this->app->bind(HistoricalExchangeRateRequestInterface::class, HistoricalExchangeRateRequest::class);
+        $this->app->bind(HistoricalExchangeRateResponseInterface::class, HistoricalExchangeRateResponse::class);
 
         // time series exchange rate
-        $this->app->bind(TimeSeriesExchangeRateFactoryContract::class, TimeSeriesExchangeRateFactory::class);
-        $this->app->bind(TimeSeriesExchangeRateRequestContract::class, TimeSeriesExchangeRateRequest::class);
-        $this->app->bind(TimeSeriesExchangeRateResponseContract::class, TimeSeriesExchangeRateResponse::class);
+        $this->app->bind(TimeSeriesExchangeRateFactoryInterface::class, TimeSeriesExchangeRateFactory::class);
+        $this->app->bind(TimeSeriesExchangeRateRequestInterface::class, TimeSeriesExchangeRateRequest::class);
+        $this->app->bind(TimeSeriesExchangeRateResponseInterface::class, TimeSeriesExchangeRateResponse::class);
     }
 }

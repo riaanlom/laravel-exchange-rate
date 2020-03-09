@@ -3,10 +3,10 @@
 namespace Yoelpc4\LaravelExchangeRate\TimeSeriesExchangeRate\FreeCurrencyConverterApi;
 
 use Yoelpc4\LaravelExchangeRate\Base\FreeCurrencyConverterApi\BaseResponse;
-use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateResponseContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateResponseInterface;
 use Yoelpc4\LaravelExchangeRate\Rate;
 
-class TimeSeriesExchangeRateResponse extends BaseResponse implements TimeSeriesExchangeRateResponseContract
+class TimeSeriesExchangeRateResponse extends BaseResponse implements TimeSeriesExchangeRateResponseInterface
 {
     /**
      * @var string

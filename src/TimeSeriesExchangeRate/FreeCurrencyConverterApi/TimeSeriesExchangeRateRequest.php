@@ -5,10 +5,10 @@ namespace Yoelpc4\LaravelExchangeRate\TimeSeriesExchangeRate\FreeCurrencyConvert
 use Illuminate\Support\Carbon;
 use Yoelpc4\LaravelExchangeRate\Base\FreeCurrencyConverterApi\BaseRequest;
 use Yoelpc4\LaravelExchangeRate\Contracts\MustValidated;
-use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateRequestContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateRequestInterface;
 use Yoelpc4\LaravelExchangeRate\Utils\FreeCurrencyConverterApiUtil;
 
-class TimeSeriesExchangeRateRequest extends BaseRequest implements TimeSeriesExchangeRateRequestContract, MustValidated
+class TimeSeriesExchangeRateRequest extends BaseRequest implements TimeSeriesExchangeRateRequestInterface, MustValidated
 {
     use FreeCurrencyConverterApiUtil;
 

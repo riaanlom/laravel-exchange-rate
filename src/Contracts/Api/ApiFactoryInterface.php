@@ -1,14 +1,14 @@
 <?php
 
-namespace Yoelpc4\LaravelExchangeRate\Contracts\Apis;
+namespace Yoelpc4\LaravelExchangeRate\Contracts\Api;
 
-interface ApiFactoryContract
+interface ApiFactoryInterface
 {
     /**
      * Create a new instance of api
      *
      * @param  string  $baseUri
-     * @return ApiContract
+     * @return ApiInterface
      */
     public function make(string $baseUri);
 }

@@ -2,10 +2,10 @@
 
 namespace Yoelpc4\LaravelExchangeRate\SupportedCurrencies\FreeCurrencyConverterApi;
 
-use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesFactoryContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesFactoryInterface;
 use Yoelpc4\LaravelExchangeRate\Currency;
 
-class SupportedCurrenciesFactory implements SupportedCurrenciesFactoryContract
+class SupportedCurrenciesFactory implements SupportedCurrenciesFactoryInterface
 {
     /**
      * @inheritDoc

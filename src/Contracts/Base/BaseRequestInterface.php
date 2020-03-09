@@ -2,7 +2,7 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Contracts\Base;
 
-interface BaseRequestContract
+interface BaseRequestInterface
 {
     /**
      * Get base request's method

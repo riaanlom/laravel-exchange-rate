@@ -5,8 +5,8 @@ namespace Yoelpc4\LaravelExchangeRate;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Validation\ValidationException;
 use Yoelpc4\LaravelExchangeRate\Contracts\MustValidated;
-use Yoelpc4\LaravelExchangeRate\Contracts\Service;
-use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesRequestContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\ServiceInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesRequestInterface;
 use Yoelpc4\LaravelExchangeRate\HistoricalExchangeRate\FreeCurrencyConverterApi\HistoricalExchangeRateFactory;
 use Yoelpc4\LaravelExchangeRate\LatestExchangeRate\FreeCurrencyConverterApi\LatestExchangeRateFactory;
 use Yoelpc4\LaravelExchangeRate\TimeSeriesExchangeRate\FreeCurrencyConverterApi\TimeSeriesExchangeRateFactory;
@@ -14,16 +14,16 @@ use Yoelpc4\LaravelExchangeRate\TimeSeriesExchangeRate\FreeCurrencyConverterApi\
 class ExchangeRateService
 {
     /**
-     * @var Service
+     * @var ServiceInterface
      */
     protected $service;
 
     /**
      * ExchangeRateService constructor.
      *
-     * @param  Service  $service
+     * @param  ServiceInterface  $service
      */
-    public function __construct(Service $service)
+    public function __construct(ServiceInterface $service)
     {
         $this->service = $service;
     }
@@ -36,7 +36,7 @@ class ExchangeRateService
      */
     public function supportedCurrencies()
     {
-        $request = \App::make(SupportedCurrenciesRequestContract::class);
+        $request = \App::make(SupportedCurrenciesRequestInterface::class);
 
         try {
             return $this->service->supportedCurrencies($request);
@@ -50,7 +50,7 @@ class ExchangeRateService
      *
      * @param  string  $base
      * @param  mixed  $symbols
-     * @return Contracts\LatestExchangeRate\LatestExchangeRateResponseContract
+     * @return Contracts\LatestExchangeRate\LatestExchangeRateResponseInterface
      * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -77,7 +77,7 @@ class ExchangeRateService
      * @param  string  $base
      * @param  mixed  $symbols
      * @param  string  $date
-     * @return Contracts\HistoricalExchangeRate\HistoricalExchangeRateResponseContract
+     * @return Contracts\HistoricalExchangeRate\HistoricalExchangeRateResponseInterface
      * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -105,7 +105,7 @@ class ExchangeRateService
      * @param  mixed  $symbols
      * @param  string  $startDate
      * @param  string  $endDate
-     * @return Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateResponseContract
+     * @return Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateResponseInterface
      * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Illuminate\Validation\ValidationException
      */

@@ -2,12 +2,12 @@
 
 namespace Yoelpc4\LaravelExchangeRate\HistoricalExchangeRate\FreeCurrencyConverterApi;
 
-use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateFactoryContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateRequestContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateFactoryInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateRequestInterface;
 use Yoelpc4\LaravelExchangeRate\Rate;
 use Yoelpc4\LaravelExchangeRate\Utils\FreeCurrencyConverterApiUtil;
 
-class HistoricalExchangeRateFactory implements HistoricalExchangeRateFactoryContract
+class HistoricalExchangeRateFactory implements HistoricalExchangeRateFactoryInterface
 {
     use FreeCurrencyConverterApiUtil;
 
@@ -26,7 +26,7 @@ class HistoricalExchangeRateFactory implements HistoricalExchangeRateFactoryCont
     /**
      * @inheritDoc
      */
-    public function makeResponse(HistoricalExchangeRateRequestContract $request, string $contents)
+    public function makeResponse(HistoricalExchangeRateRequestInterface $request, string $contents)
     {
         $base = $request->base();
 

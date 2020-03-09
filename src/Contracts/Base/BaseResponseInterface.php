@@ -4,7 +4,7 @@ namespace Yoelpc4\LaravelExchangeRate\Contracts\Base;
 
 use Yoelpc4\LaravelExchangeRate\Rate;
 
-interface BaseResponseContract
+interface BaseResponseInterface
 {
     /**
      * Get base response's base

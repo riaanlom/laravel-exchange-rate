@@ -3,9 +3,9 @@
 namespace Yoelpc4\LaravelExchangeRate\SupportedCurrencies\FreeCurrencyConverterApi;
 
 use Yoelpc4\LaravelExchangeRate\Base\FreeCurrencyConverterApi\BaseRequest;
-use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesRequestContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesRequestInterface;
 
-class SupportedCurrenciesRequest extends BaseRequest implements SupportedCurrenciesRequestContract
+class SupportedCurrenciesRequest extends BaseRequest implements SupportedCurrenciesRequestInterface
 {
     /**
      * @var string

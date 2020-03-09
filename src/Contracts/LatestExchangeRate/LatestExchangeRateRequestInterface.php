@@ -2,9 +2,9 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate;
 
-use Yoelpc4\LaravelExchangeRate\Contracts\Base\BaseRequestContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\Base\BaseRequestInterface;
 
-interface LatestExchangeRateRequestContract extends BaseRequestContract
+interface LatestExchangeRateRequestInterface extends BaseRequestInterface
 {
     /**
      * Get latest exchange rate request's base

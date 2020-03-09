@@ -1,13 +1,13 @@
 <?php
 
-namespace Yoelpc4\LaravelExchangeRate\Apis;
+namespace Yoelpc4\LaravelExchangeRate\Apis\GuzzleHttp;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Yoelpc4\LaravelExchangeRate\Contracts\Apis\ApiContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\Base\BaseRequestContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\Api\ApiInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\Base\BaseRequestInterface;
 
-class Api implements ApiContract
+class Api implements ApiInterface
 {
     /**
      * @var Client
@@ -29,7 +29,7 @@ class Api implements ApiContract
     /**
      * @inheritDoc
      */
-    public function handle(BaseRequestContract $request)
+    public function handle(BaseRequestInterface $request)
     {
         $options = [
             'query' => $request->query(),

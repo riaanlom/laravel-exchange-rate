@@ -2,10 +2,10 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Base\FreeCurrencyConverterApi;
 
-use Yoelpc4\LaravelExchangeRate\Contracts\Base\BaseResponseContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\Base\BaseResponseInterface;
 use Yoelpc4\LaravelExchangeRate\Rate;
 
-abstract class BaseResponse implements BaseResponseContract
+abstract class BaseResponse implements BaseResponseInterface
 {
     /**
      * @var string

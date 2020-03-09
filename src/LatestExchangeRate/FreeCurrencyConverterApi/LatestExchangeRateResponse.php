@@ -3,10 +3,10 @@
 namespace Yoelpc4\LaravelExchangeRate\LatestExchangeRate\FreeCurrencyConverterApi;
 
 use Yoelpc4\LaravelExchangeRate\Base\FreeCurrencyConverterApi\BaseResponse;
-use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateResponseContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateResponseInterface;
 use Yoelpc4\LaravelExchangeRate\Rate;
 
-class LatestExchangeRateResponse extends BaseResponse implements LatestExchangeRateResponseContract
+class LatestExchangeRateResponse extends BaseResponse implements LatestExchangeRateResponseInterface
 {
     /**
      * LatestExchangeRateResponse constructor.

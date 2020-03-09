@@ -2,12 +2,12 @@
 
 namespace Yoelpc4\LaravelExchangeRate\LatestExchangeRate\FreeCurrencyConverterApi;
 
-use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateFactoryContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateRequestContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateFactoryInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateRequestInterface;
 use Yoelpc4\LaravelExchangeRate\Rate;
 use Yoelpc4\LaravelExchangeRate\Utils\FreeCurrencyConverterApiUtil;
 
-class LatestExchangeRateFactory implements LatestExchangeRateFactoryContract
+class LatestExchangeRateFactory implements LatestExchangeRateFactoryInterface
 {
     use FreeCurrencyConverterApiUtil;
 
@@ -26,7 +26,7 @@ class LatestExchangeRateFactory implements LatestExchangeRateFactoryContract
     /**
      * @inheritDoc
      */
-    public function makeResponse(LatestExchangeRateRequestContract $request, string $contents)
+    public function makeResponse(LatestExchangeRateRequestInterface $request, string $contents)
     {
         $base = $request->base();
 

@@ -2,9 +2,9 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate;
 
-use Yoelpc4\LaravelExchangeRate\Contracts\Base\BaseRequestContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\Base\BaseRequestInterface;
 
-interface TimeSeriesExchangeRateRequestContract extends BaseRequestContract
+interface TimeSeriesExchangeRateRequestInterface extends BaseRequestInterface
 {
     /**
      * Get time series exchange rate request's base

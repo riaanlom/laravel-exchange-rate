@@ -3,10 +3,10 @@
 namespace Yoelpc4\LaravelExchangeRate\HistoricalExchangeRate\FreeCurrencyConverterApi;
 
 use Yoelpc4\LaravelExchangeRate\Base\FreeCurrencyConverterApi\BaseResponse;
-use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateResponseContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateResponseInterface;
 use Yoelpc4\LaravelExchangeRate\Rate;
 
-class HistoricalExchangeRateResponse extends BaseResponse implements HistoricalExchangeRateResponseContract
+class HistoricalExchangeRateResponse extends BaseResponse implements HistoricalExchangeRateResponseInterface
 {
     /**
      * @var string

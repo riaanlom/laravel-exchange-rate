@@ -3,11 +3,11 @@
 namespace Yoelpc4\LaravelExchangeRate\HistoricalExchangeRate\FreeCurrencyConverterApi;
 
 use Yoelpc4\LaravelExchangeRate\Base\FreeCurrencyConverterApi\BaseRequest;
-use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateRequestContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateRequestInterface;
 use Yoelpc4\LaravelExchangeRate\Contracts\MustValidated;
 use Yoelpc4\LaravelExchangeRate\Utils\FreeCurrencyConverterApiUtil;
 
-class HistoricalExchangeRateRequest extends BaseRequest implements HistoricalExchangeRateRequestContract, MustValidated
+class HistoricalExchangeRateRequest extends BaseRequest implements HistoricalExchangeRateRequestInterface, MustValidated
 {
     use FreeCurrencyConverterApiUtil;
 

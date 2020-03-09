@@ -2,7 +2,7 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate;
 
-interface HistoricalExchangeRateFactoryContract
+interface HistoricalExchangeRateFactoryInterface
 {
     /**
      * Create a new historical exchange rate request instance.
@@ -10,16 +10,16 @@ interface HistoricalExchangeRateFactoryContract
      * @param  string  $base
      * @param  mixed  $symbols
      * @param  string  $date
-     * @return HistoricalExchangeRateRequestContract
+     * @return HistoricalExchangeRateRequestInterface
      */
     public function makeRequest(string $base, $symbols, string $date);
 
     /**
      * Create a new historical exchange rate response instance.
      *
-     * @param  HistoricalExchangeRateRequestContract  $request
+     * @param  HistoricalExchangeRateRequestInterface  $request
      * @param  string  $contents
-     * @return HistoricalExchangeRateResponseContract
+     * @return HistoricalExchangeRateResponseInterface
      */
-    public function makeResponse(HistoricalExchangeRateRequestContract $request, string $contents);
+    public function makeResponse(HistoricalExchangeRateRequestInterface $request, string $contents);
 }

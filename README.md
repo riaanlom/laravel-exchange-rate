@@ -36,7 +36,7 @@ Publish package resources via command:
 php artisan vendor:publish --provider="Yoelpc4\LaravelExchangeRate\Providers\ExchangeRateServiceProvider" --tag=resources
 ```
 
-## Third Party Service Providers
+## Third Party ServiceInterface Providers
 
 Supported exchange rate service providers:
 - [Free Currency Converter Api](https://free.currencyconverterapi.com/) (free_currency_converter_api)
@@ -58,7 +58,7 @@ try {
 }
 ```
 
-The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesResponseContract`.
+The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesResponseInterface`.
 
 ## Latest Exchange Rate
 
@@ -80,7 +80,7 @@ try {
 }
 ```
 
-The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateResponseContract`.
+The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateResponseInterface`.
 
 ## Historical Exchange Rate
 
@@ -104,7 +104,7 @@ try {
 }
 ```
 
-The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateResponseContract`.
+The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateResponseInterface`.
 
 ## Time Series Exchange Rate
 
@@ -130,7 +130,7 @@ try {
 }
 ```
 
-The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateResponseContract`.
+The return value always instance of `\Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateResponseInterface`.
 
 ## Side Note
 

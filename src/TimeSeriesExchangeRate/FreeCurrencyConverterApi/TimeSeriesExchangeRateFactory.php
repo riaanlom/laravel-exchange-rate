@@ -2,12 +2,12 @@
 
 namespace Yoelpc4\LaravelExchangeRate\TimeSeriesExchangeRate\FreeCurrencyConverterApi;
 
-use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateFactoryContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateRequestContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateFactoryInterface;
+use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateRequestInterface;
 use Yoelpc4\LaravelExchangeRate\Rate;
 use Yoelpc4\LaravelExchangeRate\Utils\FreeCurrencyConverterApiUtil;
 
-class TimeSeriesExchangeRateFactory implements TimeSeriesExchangeRateFactoryContract
+class TimeSeriesExchangeRateFactory implements TimeSeriesExchangeRateFactoryInterface
 {
     use FreeCurrencyConverterApiUtil;
 
@@ -26,7 +26,7 @@ class TimeSeriesExchangeRateFactory implements TimeSeriesExchangeRateFactoryCont
     /**
      * @inheritDoc
      */
-    public function makeResponse(TimeSeriesExchangeRateRequestContract $request, string $contents)
+    public function makeResponse(TimeSeriesExchangeRateRequestInterface $request, string $contents)
     {
         $base = $request->base();
 

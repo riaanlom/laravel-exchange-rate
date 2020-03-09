@@ -3,11 +3,11 @@
 namespace Yoelpc4\LaravelExchangeRate\LatestExchangeRate\FreeCurrencyConverterApi;
 
 use Yoelpc4\LaravelExchangeRate\Base\FreeCurrencyConverterApi\BaseRequest;
-use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateRequestContract;
+use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateRequestInterface;
 use Yoelpc4\LaravelExchangeRate\Contracts\MustValidated;
 use Yoelpc4\LaravelExchangeRate\Utils\FreeCurrencyConverterApiUtil;
 
-class LatestExchangeRateRequest extends BaseRequest implements LatestExchangeRateRequestContract, MustValidated
+class LatestExchangeRateRequest extends BaseRequest implements LatestExchangeRateRequestInterface, MustValidated
 {
     use FreeCurrencyConverterApiUtil;
 

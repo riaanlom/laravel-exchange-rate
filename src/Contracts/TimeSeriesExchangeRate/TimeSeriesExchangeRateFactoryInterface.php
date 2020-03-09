@@ -2,7 +2,7 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate;
 
-interface TimeSeriesExchangeRateFactoryContract
+interface TimeSeriesExchangeRateFactoryInterface
 {
     /**
      * Create a new time series exchange rate request instance.
@@ -11,16 +11,16 @@ interface TimeSeriesExchangeRateFactoryContract
      * @param  mixed  $symbols
      * @param  string  $startDate
      * @param  string  $endDate
-     * @return TimeSeriesExchangeRateRequestContract
+     * @return TimeSeriesExchangeRateRequestInterface
      */
     public function makeRequest(string $base, $symbols, string $startDate, string $endDate);
 
     /**
      * Create a new time series exchange rate response instance.
      *
-     * @param  TimeSeriesExchangeRateRequestContract  $request
+     * @param  TimeSeriesExchangeRateRequestInterface  $request
      * @param  string  $contents
-     * @return TimeSeriesExchangeRateResponseContract
+     * @return TimeSeriesExchangeRateResponseInterface
      */
-    public function makeResponse(TimeSeriesExchangeRateRequestContract $request, string $contents);
+    public function makeResponse(TimeSeriesExchangeRateRequestInterface $request, string $contents);
 }

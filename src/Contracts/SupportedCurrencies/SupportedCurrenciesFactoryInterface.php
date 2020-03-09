@@ -2,7 +2,7 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies;
 
-interface SupportedCurrenciesFactoryContract
+interface SupportedCurrenciesFactoryInterface
 {
     /**
      * Create a new supported currencies response instance.
