@@ -36,7 +36,7 @@ Publish package resources via command:
 php artisan vendor:publish --provider="Yoelpc4\LaravelExchangeRate\Providers\ExchangeRateServiceProvider" --tag=resources
 ```
 
-## Third Party ServiceInterface Providers
+## Third Party Service Providers
 
 Supported exchange rate service providers:
 - [Free Currency Converter Api](https://free.currencyconverterapi.com/) (free_currency_converter_api)
