@@ -2,13 +2,14 @@
 
 return [
     'custom' => [
-        'a_year_ago'                           => ':attribute setidaknya satu tahun lalu.',
-        'days_period_after_or_before_tomorrow' => ':attribute maksimal :days hari setelah :date atau sebelum besok.',
+        'after_a_year_ago'                     => ':attribute setidaknya setelah satu tahun lalu.',
+        'days_period_after_or_before_tomorrow' => ':attribute setidaknya :days hari setelah :date atau sebelum besok.',
+        'before_tomorrow'                      => ':attribute setidaknya sebelum besok.'
     ],
 
     'attributes' => [
         'base'            => 'dasar',
-        'date'            => 'tanggal',
+        'date'            => 'tanggal kurs',
         'end_date'        => 'tanggal akhir',
         'one_year_before' => 'satu tahun sebelumnya',
         'start_date'      => 'tanggal awal',

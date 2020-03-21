@@ -116,12 +116,11 @@ class HistoricalExchangeRateRequest extends BaseRequest implements HistoricalExc
     public function messages()
     {
         return [
-            'date.after'  => \Lang::get('laravel-exchange-rate::validation.custom.a_year_ago', [
+            'date.after'  => \Lang::get('laravel-exchange-rate::validation.custom.after_a_year_ago', [
                 'attribute' => \Lang::get('laravel-exchange-rate::validation.attributes.date'),
             ]),
-            'date.before' => \Lang::get('validation.before', [
+            'date.before' => \Lang::get('laravel-exchange-rate::validation.custom.before_tomorrow', [
                 'attribute' => \Lang::get('laravel-exchange-rate::validation.attributes.date'),
-                'date'      => \Lang::get('laravel-exchange-rate::validation.attributes.tomorrow'),
             ]),
         ];
     }

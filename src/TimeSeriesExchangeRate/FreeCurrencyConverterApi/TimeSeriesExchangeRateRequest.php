@@ -137,11 +137,11 @@ class TimeSeriesExchangeRateRequest extends BaseRequest implements TimeSeriesExc
     public function messages()
     {
         return [
-            'start_date.before' => \Lang::get('validation.before', [
+            'start_date.before' => \Lang::get('validation.before_tomorrow', [
                 'attribute' => \Lang::get('laravel-exchange-rate::validation.attributes.start_date'),
                 'date'      => \Lang::get('laravel-exchange-rate::validation.attributes.end_date'),
             ]),
-            'start_date.after'  => \Lang::get('laravel-exchange-rate::validation.custom.a_year_ago', [
+            'start_date.after'  => \Lang::get('laravel-exchange-rate::validation.custom.after_a_year_ago', [
                 'attribute' => \Lang::get('laravel-exchange-rate::validation.attributes.start_date'),
             ]),
             'end_date.before'   => \Lang::get('laravel-exchange-rate::validation.custom.days_period_after_or_before_tomorrow',
@@ -149,7 +149,8 @@ class TimeSeriesExchangeRateRequest extends BaseRequest implements TimeSeriesExc
                     'attribute' => \Lang::get('laravel-exchange-rate::validation.attributes.end_date'),
                     'days'      => '8',
                     'date'      => \Lang::get('laravel-exchange-rate::validation.attributes.start_date'),
-                ]),
+                ]
+            ),
             'end_date.after'    => \Lang::get('validation.after', [
                 'attribute' => \Lang::get('laravel-exchange-rate::validation.attributes.end_date'),
                 'date'      => \Lang::get('laravel-exchange-rate::validation.attributes.start_date'),
