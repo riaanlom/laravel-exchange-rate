@@ -2,7 +2,7 @@
 
 return [
     'custom' => [
-        'a_year_ago'                           => 'The :attribute must be a year ago.',
+        'a_year_ago'                           => 'The :attribute at least a year ago.',
         'days_period_after_or_before_tomorrow' => 'The maximum :attribute must be :days days after :date or before tomorrow.',
     ],
 

@@ -2,7 +2,7 @@
 
 return [
     'custom' => [
-        'a_year_ago'                           => ':attribute harus satu tahun lalu.',
+        'a_year_ago'                           => ':attribute setidaknya satu tahun lalu.',
         'days_period_after_or_before_tomorrow' => ':attribute maksimal :days hari setelah :date atau sebelum besok.',
     ],
 
