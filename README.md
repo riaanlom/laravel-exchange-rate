@@ -1,11 +1,11 @@
 # Laravel Exchange Rate
 
 [![Packagist][ico-packagist]][link-packagist]
-[![Downloads][ico-downloads]][link-downloads]
+[![Downloads][ico-downloads]][link-packagist]
 [![Build][ico-build]][link-build]
 [![Code Coverage][ico-code-coverage]][link-code-coverage]
-[![License][ico-license]][LICENSE.md]
-[![Contributor Covenant][ico-code-of-conduct]][CODE_OF_CONDUCT.md]
+[![Software License][ico-license]](LICENSE.md)
+[![Contributor Covenant][ico-code-of-conduct]](CODE_OF_CONDUCT.md)
 
 _Laravel Exchange Rate helper._
 
