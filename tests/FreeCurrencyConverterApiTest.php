@@ -3,34 +3,32 @@
 namespace Yoelpc4\LaravelExchangeRate\Tests;
 
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
-use Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRate\HistoricalExchangeRateResponseInterface;
-use Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRate\LatestExchangeRateResponseInterface;
-use Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrencies\SupportedCurrenciesResponseContract;
-use Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRate\TimeSeriesExchangeRateResponseInterface;
 use Yoelpc4\LaravelExchangeRate\Currency;
-use Yoelpc4\LaravelExchangeRate\Rate;
+use Yoelpc4\LaravelExchangeRate\ExchangeRate;
 
 class FreeCurrencyConverterApiTest extends TestCase
 {
     /**
-     * Test for successful get supported currencies data.
+     * Test successful get supported currencies data.
      *
      * @throws RequestException
      */
-    public function testSuccessfulSupportedCurrencies()
+    public function testSuccessfulGetSupportedCurrencies()
     {
         try {
-            $supportedCurrencies = \ExchangeRateService::supportedCurrencies();
+            $currencies = \ExchangeRateService::provider('free_currency_converter_api')
+                ->currencies();
 
-            $this->assertTrue($supportedCurrencies instanceof SupportedCurrenciesResponseContract);
-
-            $this->assertTrue(property_exists($supportedCurrencies, 'currencies'));
-
-            foreach ($supportedCurrencies->currencies() as $currency) {
+            foreach ($currencies as $currency) {
                 $this->assertTrue($currency instanceof Currency);
 
-                $this->assertTrue(property_exists($currency, 'name'));
+                $this->assertTrue(is_string($currency->code()));
+
+                $this->assertTrue(strlen($currency->code()) === 3);
+
+                $this->assertTrue(is_string($currency->name()));
 
                 $this->assertTrue(property_exists($currency, 'symbol'));
             }
@@ -40,12 +38,12 @@ class FreeCurrencyConverterApiTest extends TestCase
     }
 
     /**
-     * Test for successful get latest exchange rate data.
+     * Test successful get latest exchange rate data.
      *
      * @throws RequestException
      * @throws ValidationException
      */
-    public function testSuccessfulLatestExchangeRate()
+    public function testSuccessfulGetLatestExchangeRate()
     {
         $base = 'IDR';
 
@@ -54,24 +52,19 @@ class FreeCurrencyConverterApiTest extends TestCase
         ];
 
         try {
-            $latestExchangeRate = \ExchangeRateService::latest($base, $symbols);
+            $exchangeRates = \ExchangeRateService::provider('free_currency_converter_api')
+                ->latest($base, $symbols);
 
-            $this->assertTrue($latestExchangeRate instanceof LatestExchangeRateResponseInterface);
+            foreach ($exchangeRates as $exchangeRate) {
+                $this->assertTrue($exchangeRate instanceof ExchangeRate);
 
-            $this->assertTrue($latestExchangeRate->base() === $base);
+                $this->assertTrue($exchangeRate->baseCurrency() === $base);
 
-            $this->assertTrue($latestExchangeRate->symbols() === $symbols);
+                $this->assertTrue(in_array($exchangeRate->targetCurrency(), $symbols));
 
-            foreach ($latestExchangeRate->rates() as $rate) {
-                $this->assertTrue($rate instanceof Rate);
+                $this->assertTrue(Carbon::hasFormat($exchangeRate->date(), 'Y-m-d'));
 
-                $this->assertTrue($rate->baseCurrency() === $base);
-
-                $this->assertTrue(in_array($rate->targetCurrency(), $symbols));
-
-                $this->assertTrue(property_exists($rate, 'date'));
-
-                $this->assertTrue(property_exists($rate, 'value'));
+                $this->assertTrue(is_numeric($exchangeRate->value()));
             }
         } catch (ValidationException $e) {
             throw $e;
@@ -81,12 +74,12 @@ class FreeCurrencyConverterApiTest extends TestCase
     }
 
     /**
-     * Test for successful get historical exchange rate data.
+     * Test successful get historical exchange rate data.
      *
      * @throws RequestException
      * @throws ValidationException
      */
-    public function testSuccessfulHistoricalExchangeRate()
+    public function testSuccessfulGetHistoricalExchangeRate()
     {
         $base = 'IDR';
 
@@ -97,26 +90,19 @@ class FreeCurrencyConverterApiTest extends TestCase
         $date = now()->subDays(3)->toDateString();
 
         try {
-            $historicalExchangeRate = \ExchangeRateService::historical($base, $symbols, $date);
+            $exchangeRates = \ExchangeRateService::provider('free_currency_converter_api')
+                ->historical($base, $symbols, $date);
 
-            $this->assertTrue($historicalExchangeRate instanceof HistoricalExchangeRateResponseInterface);
+            foreach ($exchangeRates as $exchangeRate) {
+                $this->assertTrue($exchangeRate instanceof ExchangeRate);
 
-            $this->assertTrue($historicalExchangeRate->base() === $base);
+                $this->assertTrue($exchangeRate->baseCurrency() === $base);
 
-            $this->assertTrue($historicalExchangeRate->symbols() === $symbols);
+                $this->assertTrue(in_array($exchangeRate->targetCurrency(), $symbols));
 
-            $this->assertTrue($historicalExchangeRate->date() === $date);
+                $this->assertTrue(Carbon::hasFormat($exchangeRate->date(), 'Y-m-d'));
 
-            foreach ($historicalExchangeRate->rates() as $rate) {
-                $this->assertTrue($rate instanceof Rate);
-
-                $this->assertTrue($rate->baseCurrency() === $base);
-
-                $this->assertTrue(in_array($rate->targetCurrency(), $symbols));
-
-                $this->assertTrue(property_exists($rate, 'date'));
-
-                $this->assertTrue(property_exists($rate, 'value'));
+                $this->assertTrue(is_numeric($exchangeRate->value()));
             }
         } catch (ValidationException $e) {
             throw $e;
@@ -126,12 +112,12 @@ class FreeCurrencyConverterApiTest extends TestCase
     }
 
     /**
-     * Test for successful get time series exchange rate data.
+     * Test successful get time series exchange rate data.
      *
      * @throws RequestException
      * @throws ValidationException
      */
-    public function testSuccessfulTimeSeriesExchangeRate()
+    public function testSuccessfulGetTimeSeriesExchangeRate()
     {
         $base = 'IDR';
 
@@ -146,31 +132,22 @@ class FreeCurrencyConverterApiTest extends TestCase
         $endDate = now()->toDateString();
 
         try {
-            $timeSeriesExchangeRate = \ExchangeRateService::timeSeries($base, $symbols, $startDate, $endDate);
+            $exchangeRates = \ExchangeRateService::provider('free_currency_converter_api')
+                ->timeSeries($base, $symbols, $startDate, $endDate);
 
-            $this->assertTrue($timeSeriesExchangeRate instanceof TimeSeriesExchangeRateResponseInterface);
+            foreach ($exchangeRates as $exchangeRate) {
+                $this->assertTrue($exchangeRate instanceof ExchangeRate);
 
-            $this->assertTrue($timeSeriesExchangeRate->base() === $base);
+                $this->assertTrue($exchangeRate->baseCurrency() === $base);
 
-            $this->assertTrue($timeSeriesExchangeRate->symbols() === $symbols);
+                $this->assertTrue(in_array($exchangeRate->targetCurrency(), $symbols));
 
-            $this->assertTrue($timeSeriesExchangeRate->startDate() === $startDate);
+                $this->assertTrue(Carbon::hasFormat($exchangeRate->date(), 'Y-m-d'));
 
-            $this->assertTrue($timeSeriesExchangeRate->endDate() === $endDate);
-
-            foreach ($timeSeriesExchangeRate->rates() as $rate) {
-                $this->assertTrue($rate instanceof Rate);
-
-                $this->assertTrue($rate->baseCurrency() === $base);
-
-                $this->assertTrue(in_array($rate->targetCurrency(), $symbols));
-
-                $this->assertTrue(property_exists($rate, 'date'));
-
-                $this->assertTrue(property_exists($rate, 'value'));
+                $this->assertTrue(is_numeric($exchangeRate->value()));
             }
 
-            $this->assertTrue(count($timeSeriesExchangeRate->rates()) === (count($symbols) * ($dayDiff + 1)));
+            $this->assertTrue(count($exchangeRates) === (count($symbols) * ($dayDiff + 1)));
         } catch (ValidationException $e) {
             throw $e;
         } catch (RequestException $e) {

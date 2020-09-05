@@ -7,6 +7,11 @@ class Currency
     /**
      * @var string
      */
+    protected $code;
+
+    /**
+     * @var string
+     */
     protected $name;
 
     /**
@@ -17,13 +22,27 @@ class Currency
     /**
      * Currency constructor.
      *
+     * @param  string  $code
      * @param  string  $name
-     * @param  string  $symbol
+     * @param  string|null  $symbol
      */
-    public function __construct(string $name, string $symbol)
+    public function __construct(string $code, string $name, string $symbol = null)
     {
+        $this->code = $code;
+
         $this->name = $name;
+
         $this->symbol = $symbol;
+    }
+
+    /**
+     * Get currency's code
+     *
+     * @return string
+     */
+    public function code()
+    {
+        return $this->code;
     }
 
     /**

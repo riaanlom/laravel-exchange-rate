@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Exchange Rate Provider
+    | Default Exchange ExchangeRate Provider
     |--------------------------------------------------------------------------
     |
     | This option controls the default exchange rate provider that will be used on various exchange rate transactions.
@@ -16,7 +16,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Exchange Rate Providers
+    | Exchange ExchangeRate Providers
     |--------------------------------------------------------------------------
     |
     | Here you may configure the providers information for each services that is used by your application.
@@ -26,8 +26,9 @@ return [
     'providers' => [
 
         'free_currency_converter_api' => [
+            'provider' => 'free_currency_converter_api',
             'api_key'  => env('FREE_CURRENCY_CONVERTER_API_KEY'),
-            'base_url' => env('FREE_CURRENCY_CONVERTER_API_BASE_URL', 'https://free.currconv.com/api/v7/'),
+            'base_url' => env('FREE_CURRENCY_CONVERTER_API_BASE_URL', 'https://free.currconv.com/api/v8/'),
         ],
 
     ],

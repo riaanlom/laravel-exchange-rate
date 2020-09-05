@@ -4,8 +4,8 @@ namespace Yoelpc4\LaravelExchangeRate\Tests;
 
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
-use Yoelpc4\LaravelExchangeRate\Facades\ExchangeRateService;
-use Yoelpc4\LaravelExchangeRate\Providers\ExchangeRateServiceProvider;
+use Yoelpc4\LaravelExchangeRate\ExchangeRateService;
+use Yoelpc4\LaravelExchangeRate\ExchangeRateServiceProvider;
 
 abstract class TestCase extends OrchestraTestCase
 {
@@ -43,8 +43,9 @@ abstract class TestCase extends OrchestraTestCase
         $app['config']->set('exchange-rate.default', env('EXCHANGE_RATE_PROVIDER'));
 
         $app['config']->set('exchange-rate.providers.free_currency_converter_api', [
+            'provider' => 'free_currency_converter_api',
             'api_key'  => env('FREE_CURRENCY_CONVERTER_API_KEY'),
-            'base_url' => env('FREE_CURRENCY_CONVERTER_API_BASE_URL'),
+            'base_url' => env('FREE_CURRENCY_CONVERTER_API_BASE_URL', 'https://free.currconv.com/api/v8/'),
         ]);
     }
 }
