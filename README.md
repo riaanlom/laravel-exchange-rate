@@ -135,7 +135,7 @@ You can switch between supported providers
 
 ```php
 try {
-    $currencies = \ExchangeRateService::provider('free_currency_converter')->currencies();
+    $currencies = \ExchangeRateService::provider('free_currency_converter_api')->currencies();
 } catch (\GuzzleHttp\Exception\RequestException $e) {
     throw $e;
 }
