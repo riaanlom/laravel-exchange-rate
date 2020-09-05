@@ -4,8 +4,8 @@
 [![Downloads][ico-downloads]][link-downloads]
 [![Build][ico-build]][link-build]
 [![Code Coverage][ico-code-coverage]][link-code-coverage]
-[![License][ico-license]][link-license]
-[![Contributor Covenant][ico-code-of-conduct]][link-code-of-conduct]
+[![License][ico-license]][LICENSE.md]
+[![Contributor Covenant][ico-code-of-conduct]][CODE_OF_CONDUCT.md]
 
 _Laravel Exchange Rate helper._
 
@@ -158,8 +158,5 @@ The Laravel Exchange Rate is open-sourced software licensed under the [MIT licen
 [ico-code-of-conduct]: https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg
 
 [link-packagist]: https://packagist.org/packages/yoelpc4/laravel-exchange-rate
-[link-downloads]: https://packagist.org/packages/yoelpc4/laravel-exchange-rate
 [link-build]: https://travis-ci.com/yoelpc4/laravel-exchange-rate
 [link-code-coverage]: https://codecov.io/gh/yoelpc4/laravel-exchange-rate
-[link-license]: LICENSE.md
-[link-code-of-conduct]: CODE_OF_CONDUCT.md
