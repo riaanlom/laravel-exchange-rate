@@ -1,6 +1,6 @@
 # Laravel Exchange Rate
 
-[![Packagist][ico-version]][link-packagist]
+[![Packagist][ico-packagist]][link-packagist]
 [![Downloads][ico-downloads]][link-downloads]
 [![Build][ico-build]][link-build]
 [![Code Coverage][ico-code-coverage]][link-code-coverage]
@@ -151,15 +151,15 @@ therefore it will throw `\Illuminate\Validation\ValidationException` for every u
 The Laravel Exchange Rate is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 [ico-packagist]: https://img.shields.io/packagist/v/yoelpc4/laravel-exchange-rate.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/yoelpc4/laravel-exchange-rate.svg?style=flat-square
 [ico-build]: https://travis-ci.com/yoelpc4/laravel-exchange-rate.svg?branch=master&style=flat-square
 [ico-code-coverage]: https://codecov.io/gh/yoelpc4/laravel-exchange-rate/branch/master/graph/badge.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/yoelpc4/laravel-exchange-rate.svg?style=flat-square
 [ico-license]: https://img.shields.io/packagist/l/yoelpc4/laravel-exchange-rate.svg?style=flat-square
 [ico-code-of-conduct]: https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg
 
 [link-packagist]: https://packagist.org/packages/yoelpc4/laravel-exchange-rate
+[link-downloads]: https://packagist.org/packages/yoelpc4/laravel-exchange-rate
 [link-build]: https://travis-ci.com/yoelpc4/laravel-exchange-rate
 [link-code-coverage]: https://codecov.io/gh/yoelpc4/laravel-exchange-rate
-[link-downloads]: https://packagist.org/packages/yoelpc4/laravel-exchange-rate
 [link-license]: LICENSE.md
 [link-code-of-conduct]: CODE_OF_CONDUCT.md
