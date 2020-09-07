@@ -10,6 +10,9 @@ use Yoelpc4\LaravelExchangeRate\Contracts\Api\Factory as ApiFactory;
 use Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRateProvider;
 use Yoelpc4\LaravelExchangeRate\Contracts\Factory;
 
+/**
+ * @mixin \Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRateProvider
+ */
 class ExchangeRateServiceManager implements Factory
 {
     /**
