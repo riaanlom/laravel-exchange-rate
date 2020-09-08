@@ -41,15 +41,15 @@ class LatestExchangeRateRequest implements Requestable, Validatable
      *
      * @param  string  $apiKey
      * @param  string  $base
-     * @param  array  $symbols
+     * @param  string|array  $symbols
      */
-    public function __construct(string $apiKey, string $base, array $symbols)
+    public function __construct(string $apiKey, string $base, $symbols)
     {
         $this->apiKey = $apiKey;
 
-        $this->base = $base;
+        $this->base = strtoupper($base);
 
-        $this->symbols = $symbols;
+        $this->symbols = $this->formatSymbols($symbols);
     }
 
     /**

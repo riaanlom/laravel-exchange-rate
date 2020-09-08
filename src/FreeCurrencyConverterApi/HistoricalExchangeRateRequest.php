@@ -46,16 +46,16 @@ class HistoricalExchangeRateRequest implements Requestable, Validatable
      *
      * @param  string  $apiKey
      * @param  string  $base
-     * @param  array  $symbols
+     * @param  string|array  $symbols
      * @param  string  $date
      */
-    public function __construct(string $apiKey, string $base, array $symbols, string $date)
+    public function __construct(string $apiKey, string $base, $symbols, string $date)
     {
         $this->apiKey = $apiKey;
 
-        $this->base = $base;
+        $this->base = strtoupper($base);
 
-        $this->symbols = $symbols;
+        $this->symbols = $this->formatSymbols($symbols);
 
         $this->date = $date;
     }
