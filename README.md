@@ -90,7 +90,7 @@ try {
 
     $date = now()->subDays(3)->toDateString();
     
-    $historicalExchangeRate = \ExchangeRateService::latest($base, $symbols, $date);
+    $historicalExchangeRate = \ExchangeRateService::historical($base, $symbols, $date);
 } catch (\Illuminate\Validation\ValidationException $e) {
     throw $e;
 } catch (\GuzzleHttp\Exception\RequestException $e) {
@@ -128,7 +128,7 @@ The return value is an array of `\Yoelpc4\LaravelExchangeRate\ExchangeRate` obje
 
 ## Switching Provider
 
-You can switch between available providers
+Switch between available providers
 
 ```php
 try {
