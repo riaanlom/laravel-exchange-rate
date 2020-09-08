@@ -63,10 +63,10 @@ class FreeCurrencyConverterApiProvider implements ExchangeRateProvider
     /**
      * @inheritDoc
      */
-    public function latest(string $base, $symbols)
+    public function latest(string $base, $targets)
     {
         try {
-            $request = new LatestExchangeRateRequest($this->apiKey, $base, $symbols);
+            $request = new LatestExchangeRateRequest($this->apiKey, $base, $targets);
 
             $this->validate($request);
 
@@ -95,10 +95,10 @@ class FreeCurrencyConverterApiProvider implements ExchangeRateProvider
     /**
      * @inheritDoc
      */
-    public function historical(string $base, $symbols, string $date)
+    public function historical(string $base, $targets, string $date)
     {
         try {
-            $request = new HistoricalExchangeRateRequest($this->apiKey, $base, $symbols, $date);
+            $request = new HistoricalExchangeRateRequest($this->apiKey, $base, $targets, $date);
 
             $this->validate($request);
 
@@ -125,10 +125,10 @@ class FreeCurrencyConverterApiProvider implements ExchangeRateProvider
     /**
      * @inheritDoc
      */
-    public function timeSeries(string $base, $symbols, string $startDate, string $endDate)
+    public function timeSeries(string $base, $targets, string $startDate, string $endDate)
     {
         try {
-            $request = new TimeSeriesExchangeRateRequest($this->apiKey, $base, $symbols, $startDate, $endDate);
+            $request = new TimeSeriesExchangeRateRequest($this->apiKey, $base, $targets, $startDate, $endDate);
 
             $this->validate($request);
 

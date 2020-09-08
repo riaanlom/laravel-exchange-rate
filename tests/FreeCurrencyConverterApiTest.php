@@ -29,8 +29,6 @@ class FreeCurrencyConverterApiTest extends TestCase
                 $this->assertTrue(strlen($currency->code()) === 3);
 
                 $this->assertTrue(is_string($currency->name()));
-
-                $this->assertTrue(property_exists($currency, 'symbol'));
             }
         } catch (RequestException $e) {
             throw $e;
@@ -47,20 +45,20 @@ class FreeCurrencyConverterApiTest extends TestCase
     {
         $base = 'IDR';
 
-        $symbols = [
+        $targets = [
             'USD', 'DZD',
         ];
 
         try {
             $exchangeRates = \ExchangeRateService::provider('free_currency_converter_api')
-                ->latest($base, $symbols);
+                ->latest($base, $targets);
 
             foreach ($exchangeRates as $exchangeRate) {
                 $this->assertTrue($exchangeRate instanceof ExchangeRate);
 
                 $this->assertTrue($exchangeRate->baseCurrency() === $base);
 
-                $this->assertTrue(in_array($exchangeRate->targetCurrency(), $symbols));
+                $this->assertTrue(in_array($exchangeRate->targetCurrency(), $targets));
 
                 $this->assertTrue(Carbon::hasFormat($exchangeRate->date(), 'Y-m-d'));
 
@@ -83,7 +81,7 @@ class FreeCurrencyConverterApiTest extends TestCase
     {
         $base = 'IDR';
 
-        $symbols = [
+        $targets = [
             'USD', 'DZD',
         ];
 
@@ -91,14 +89,14 @@ class FreeCurrencyConverterApiTest extends TestCase
 
         try {
             $exchangeRates = \ExchangeRateService::provider('free_currency_converter_api')
-                ->historical($base, $symbols, $date);
+                ->historical($base, $targets, $date);
 
             foreach ($exchangeRates as $exchangeRate) {
                 $this->assertTrue($exchangeRate instanceof ExchangeRate);
 
                 $this->assertTrue($exchangeRate->baseCurrency() === $base);
 
-                $this->assertTrue(in_array($exchangeRate->targetCurrency(), $symbols));
+                $this->assertTrue(in_array($exchangeRate->targetCurrency(), $targets));
 
                 $this->assertTrue(Carbon::hasFormat($exchangeRate->date(), 'Y-m-d'));
 
@@ -121,7 +119,7 @@ class FreeCurrencyConverterApiTest extends TestCase
     {
         $base = 'IDR';
 
-        $symbols = [
+        $targets = [
             'USD', 'DZD',
         ];
 
@@ -133,21 +131,21 @@ class FreeCurrencyConverterApiTest extends TestCase
 
         try {
             $exchangeRates = \ExchangeRateService::provider('free_currency_converter_api')
-                ->timeSeries($base, $symbols, $startDate, $endDate);
+                ->timeSeries($base, $targets, $startDate, $endDate);
 
             foreach ($exchangeRates as $exchangeRate) {
                 $this->assertTrue($exchangeRate instanceof ExchangeRate);
 
                 $this->assertTrue($exchangeRate->baseCurrency() === $base);
 
-                $this->assertTrue(in_array($exchangeRate->targetCurrency(), $symbols));
+                $this->assertTrue(in_array($exchangeRate->targetCurrency(), $targets));
 
                 $this->assertTrue(Carbon::hasFormat($exchangeRate->date(), 'Y-m-d'));
 
                 $this->assertTrue(is_numeric($exchangeRate->value()));
             }
 
-            $this->assertTrue(count($exchangeRates) === (count($symbols) * ($dayDiff + 1)));
+            $this->assertTrue(count($exchangeRates) === (count($targets) * ($dayDiff + 1)));
         } catch (ValidationException $e) {
             throw $e;
         } catch (RequestException $e) {

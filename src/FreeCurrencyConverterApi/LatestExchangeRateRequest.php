@@ -34,22 +34,22 @@ class LatestExchangeRateRequest implements Requestable, Validatable
     /**
      * @var array
      */
-    public $symbols;
+    public $targets;
 
     /**
      * LatestExchangeRateRequest constructor.
      *
      * @param  string  $apiKey
      * @param  string  $base
-     * @param  string|array  $symbols
+     * @param  string|array  $targets
      */
-    public function __construct(string $apiKey, string $base, $symbols)
+    public function __construct(string $apiKey, string $base, $targets)
     {
         $this->apiKey = $apiKey;
 
         $this->base = strtoupper($base);
 
-        $this->symbols = $this->formatSymbols($symbols);
+        $this->targets = $this->formatTargets($targets);
     }
 
     /**
@@ -71,7 +71,7 @@ class LatestExchangeRateRequest implements Requestable, Validatable
     {
         return [
             'base'    => $this->base,
-            'symbols' => $this->symbols,
+            'targets' => $this->targets,
         ];
     }
 
@@ -84,8 +84,8 @@ class LatestExchangeRateRequest implements Requestable, Validatable
     {
         return [
             'base'      => 'required|string|size:3',
-            'symbols'   => 'required|array|between:1,2',
-            'symbols.*' => 'required|string|size:3',
+            'targets'   => 'required|array|between:1,2',
+            'targets.*' => 'required|string|size:3',
         ];
     }
 
@@ -104,8 +104,8 @@ class LatestExchangeRateRequest implements Requestable, Validatable
     {
         return [
             'base'      => __('laravel-exchange-rate::validation.attributes.base'),
-            'symbols'   => __('laravel-exchange-rate::validation.attributes.symbols'),
-            'symbols.*' => __('laravel-exchange-rate::validation.attributes.symbol'),
+            'targets'   => __('laravel-exchange-rate::validation.attributes.targets'),
+            'targets.*' => __('laravel-exchange-rate::validation.attributes.target'),
         ];
     }
 }

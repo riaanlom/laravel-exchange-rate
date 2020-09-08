@@ -62,11 +62,11 @@ Get latest exchange rate
 try {
     $base = 'IDR';
     
-    $symbols = [
+    $targets = [
         'USD', 'DZD',
     ];
     
-    $latestExchangeRate = \ExchangeRateService::latest($base, $symbols);
+    $latestExchangeRate = \ExchangeRateService::latest($base, $targets);
 } catch (\Illuminate\Validation\ValidationException $e) {
     throw $e;
 } catch (\GuzzleHttp\Exception\RequestException $e) {
@@ -84,13 +84,13 @@ Get historical exchange rate
 try {
     $base = 'IDR';
     
-    $symbols = [
+    $targets = [
         'USD', 'DZD',
     ];
 
     $date = now()->subDays(3)->toDateString();
     
-    $historicalExchangeRate = \ExchangeRateService::historical($base, $symbols, $date);
+    $historicalExchangeRate = \ExchangeRateService::historical($base, $targets, $date);
 } catch (\Illuminate\Validation\ValidationException $e) {
     throw $e;
 } catch (\GuzzleHttp\Exception\RequestException $e) {
@@ -108,7 +108,7 @@ Get time series exchange rate
 try {
     $base = 'IDR';
     
-    $symbols = [
+    $targets = [
         'USD', 'DZD',
     ];
     
@@ -116,7 +116,7 @@ try {
 
     $endDate = now()->toDateString();
     
-    $timeSeriesExchangeRate = \ExchangeRateService::timeSeries($base, $symbols, $startDate, $endDate);
+    $timeSeriesExchangeRate = \ExchangeRateService::timeSeries($base, $targets, $startDate, $endDate);
 } catch (\Illuminate\Validation\ValidationException $e) {
     throw $e;
 } catch (\GuzzleHttp\Exception\RequestException $e) {

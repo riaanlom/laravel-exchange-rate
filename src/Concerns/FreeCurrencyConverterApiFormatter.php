@@ -11,23 +11,23 @@ trait FreeCurrencyConverterApiFormatter
      */
     protected function formatQuery()
     {
-        $queries = array_map(function (string $symbol) {
-            return "{$this->base}_{$symbol}";
-        }, $this->symbols);
+        $queries = array_map(function (string $target) {
+            return "{$this->base}_{$target}";
+        }, $this->targets);
 
         return implode(',', $queries);
     }
 
     /**
-     * Format free currency converter api symbols
+     * Format free currency converter api targets
      *
-     * @param  string|array  $symbols
+     * @param  string|array  $targets
      * @return array
      */
-    protected function formatSymbols($symbols)
+    protected function formatTargets($targets)
     {
-        return array_map(function (string $symbol) {
-            return strtoupper($symbol);
-        }, \Arr::wrap($symbols));
+        return array_map(function (string $target) {
+            return strtoupper($target);
+        }, \Arr::wrap($targets));
     }
 }

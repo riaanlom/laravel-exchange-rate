@@ -35,7 +35,7 @@ class TimeSeriesExchangeRateRequest implements Requestable, Validatable
     /**
      * @var array
      */
-    public $symbols;
+    public $targets;
 
     /**
      * @var string
@@ -52,17 +52,17 @@ class TimeSeriesExchangeRateRequest implements Requestable, Validatable
      *
      * @param  string  $apiKey
      * @param  string  $base
-     * @param  string|array  $symbols
+     * @param  string|array  $targets
      * @param  string  $startDate
      * @param  string  $endDate
      */
-    public function __construct(string $apiKey, string $base, $symbols, string $startDate, string $endDate)
+    public function __construct(string $apiKey, string $base, $targets, string $startDate, string $endDate)
     {
         $this->apiKey = $apiKey;
 
         $this->base = strtoupper($base);
 
-        $this->symbols = $this->formatSymbols($symbols);
+        $this->targets = $this->formatTargets($targets);
 
         $this->startDate = $startDate;
 
@@ -90,7 +90,7 @@ class TimeSeriesExchangeRateRequest implements Requestable, Validatable
     {
         return [
             'base'       => $this->base,
-            'symbols'    => $this->symbols,
+            'targets'    => $this->targets,
             'start_date' => $this->startDate,
             'end_date'   => $this->endDate,
         ];
@@ -109,8 +109,8 @@ class TimeSeriesExchangeRateRequest implements Requestable, Validatable
 
         return [
             'base'       => 'required|string|size:3',
-            'symbols'    => 'required|array|min:1|between:1,2',
-            'symbols.*'  => 'required|string|size:3',
+            'targets'    => 'required|array|min:1|between:1,2',
+            'targets.*'  => 'required|string|size:3',
             'start_date' => "required|string|date|date_format:Y-m-d|after:{$aYearAgo}|before:end_date",
             'end_date'   => "required|string|date|date_format:Y-m-d|after:start_date|before:tomorrow|before:{$nineDaysAfterTheStartDate}",
         ];
@@ -150,8 +150,8 @@ class TimeSeriesExchangeRateRequest implements Requestable, Validatable
     {
         return [
             'base'       => __('laravel-exchange-rate::validation.attributes.base'),
-            'symbols'    => __('laravel-exchange-rate::validation.attributes.symbols'),
-            'symbols.*'  => __('laravel-exchange-rate::validation.attributes.symbol'),
+            'targets'    => __('laravel-exchange-rate::validation.attributes.targets'),
+            'targets.*'  => __('laravel-exchange-rate::validation.attributes.target'),
             'start_date' => __('laravel-exchange-rate::validation.attributes.start_date'),
             'end_date'   => __('laravel-exchange-rate::validation.attributes.end_date'),
         ];

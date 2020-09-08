@@ -13,8 +13,8 @@ return [
         'end_date'        => 'tanggal akhir',
         'one_year_before' => 'satu tahun sebelumnya',
         'start_date'      => 'tanggal mulai',
-        'symbol'          => 'simbol',
-        'symbols'         => 'simbol',
+        'target'          => 'target',
+        'targets'         => 'target',
         'tomorrow'        => 'besok',
     ],
 ];

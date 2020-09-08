@@ -13,8 +13,8 @@ return [
         'end_date'        => 'end date',
         'one_year_before' => 'one year before',
         'start_date'      => 'start date',
-        'symbol'          => 'symbol',
-        'symbols'         => 'symbols',
+        'target'          => 'target',
+        'targets'         => 'targets',
         'tomorrow'        => 'tomorrow',
     ],
 ];
