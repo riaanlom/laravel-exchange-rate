@@ -26,22 +26,19 @@ composer require yoelpc4/laravel-exchange-rate
 Publish package configuration via command:
 
 ```bash
-php artisan vendor:publish --provider="Yoelpc4\LaravelExchangeRate\Providers\ExchangeRateServiceProvider" --tag=config
+php artisan vendor:publish --provider="Yoelpc4\LaravelExchangeRate\ExchangeRateServiceProvider" --tag=config
 ```
 
 Publish package resources via command:
 
 ```bash
-php artisan vendor:publish --provider="Yoelpc4\LaravelExchangeRate\Providers\ExchangeRateServiceProvider" --tag=resources
+php artisan vendor:publish --provider="Yoelpc4\LaravelExchangeRate\ExchangeRateServiceProvider" --tag=resources
 ```
 
-## Service Providers
+## Available Service Providers
 
-Supported exchange rate service providers:
-- [Free Currency Converter Api](https://free.currencyconverterapi.com/) (free_currency_converter_api)
- 
-Define the default provider value in your .env 
-`EXCHANGE_RATE_PROVIDER=free_currency_converter_api`
+Available exchange rate service providers:
+- [Free Currency Converter Api](https://free.currencyconverterapi.com/)
 
 ## Supported Currencies
 
@@ -129,9 +126,9 @@ try {
 
 The return value is an array of `\Yoelpc4\LaravelExchangeRate\ExchangeRate` object.
 
-## Switching Implementation
+## Switching Provider
 
-You can switch between supported providers
+You can switch between available providers
 
 ```php
 try {

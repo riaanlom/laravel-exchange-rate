@@ -15,7 +15,7 @@ class Currency
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $symbol;
 
@@ -58,7 +58,7 @@ class Currency
     /**
      * Get currency's symbol
      *
-     * @return string
+     * @return string|null
      */
     public function symbol()
     {

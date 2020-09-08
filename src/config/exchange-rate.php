@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Exchange ExchangeRate Provider
+    | Default Exchange Rate Provider
     |--------------------------------------------------------------------------
     |
     | This option controls the default exchange rate provider that will be used on various exchange rate transactions.
@@ -16,7 +16,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Exchange ExchangeRate Providers
+    | Exchange Rate Providers
     |--------------------------------------------------------------------------
     |
     | Here you may configure the providers information for each services that is used by your application.
