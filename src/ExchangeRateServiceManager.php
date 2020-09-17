@@ -110,7 +110,7 @@ class ExchangeRateServiceManager implements Factory
     protected function resolveApi(string $baseUrl)
     {
         try {
-            return resolve(ApiFactory::class)->make($baseUrl);
+            return app(ApiFactory::class)->make($baseUrl);
         } catch (BindingResolutionException $e) {
             throw $e;
         }

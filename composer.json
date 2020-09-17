@@ -19,6 +19,7 @@
         "ext-json": "*",
         "php": ">=7.1",
         "guzzlehttp/guzzle": "6.*",
+        "illuminate/container": "8.*|7.*|6.*|5.8.*",
         "illuminate/contracts": "8.*|7.*|6.*|5.8.*",
         "illuminate/support": "8.*|7.*|6.*|5.8.*",
         "illuminate/validation": "8.*|7.*|6.*|5.8.*",
