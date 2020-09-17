@@ -16,7 +16,7 @@ class ExchangeRateServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/config/exchange-rate.php', 'exchange-rate');
+        $this->mergeConfigFrom(__DIR__.'/../config/exchange-rate.php', 'exchange-rate');
 
         $this->app->singleton(Factory::class, ApiManager::class);
 
@@ -36,14 +36,14 @@ class ExchangeRateServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'laravel-exchange-rate');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'laravel-exchange-rate');
 
         $this->publishes([
-            __DIR__.'/config/exchange-rate.php' => config_path('exchange-rate.php'),
+            __DIR__.'/../config/exchange-rate.php' => config_path('exchange-rate.php'),
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/resources/lang' => resource_path('lang/vendor/laravel-exchange-rate'),
+            __DIR__.'/../resources/lang' => resource_path('lang/vendor/laravel-exchange-rate'),
         ], 'resources');
     }
 }
