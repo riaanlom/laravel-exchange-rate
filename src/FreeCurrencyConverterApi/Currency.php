@@ -1,8 +1,10 @@
 <?php
 
-namespace Yoelpc4\LaravelExchangeRate;
+namespace Yoelpc4\LaravelExchangeRate\FreeCurrencyConverterApi;
 
-class Currency
+use Yoelpc4\LaravelExchangeRate\Contracts\CurrencyInterface;
+
+class Currency implements CurrencyInterface
 {
     /**
      * @var string
@@ -22,23 +24,19 @@ class Currency
     /**
      * Currency constructor.
      *
-     * @param  string  $code
-     * @param  string  $name
-     * @param  string|null  $symbol
+     * @param  array  $data
      */
-    public function __construct(string $code, string $name, string $symbol = null)
+    public function __construct(array $data)
     {
-        $this->code = $code;
+        $this->code = $data['id'];
 
-        $this->name = $name;
+        $this->name = $data['currencyName'];
 
-        $this->symbol = $symbol;
+        $this->symbol = $data['currencySymbol'] ?? null;
     }
 
     /**
-     * Get currency's code
-     *
-     * @return string
+     * @inheritDoc
      */
     public function code()
     {
@@ -46,9 +44,7 @@ class Currency
     }
 
     /**
-     * Get currency's name
-     *
-     * @return string
+     * @inheritDoc
      */
     public function name()
     {
@@ -56,9 +52,7 @@ class Currency
     }
 
     /**
-     * Get currency's symbol
-     *
-     * @return string|null
+     * @inheritDoc
      */
     public function symbol()
     {

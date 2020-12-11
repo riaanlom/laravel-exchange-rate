@@ -2,6 +2,8 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Concerns;
 
+use Illuminate\Support\Arr;
+
 trait FreeCurrencyConverterApiFormatter
 {
     /**
@@ -28,6 +30,6 @@ trait FreeCurrencyConverterApiFormatter
     {
         return array_map(function (string $target) {
             return strtoupper($target);
-        }, \Arr::wrap($targets));
+        }, Arr::wrap($targets));
     }
 }

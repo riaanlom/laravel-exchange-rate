@@ -6,14 +6,13 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Foundation\Application;
 use InvalidArgumentException;
 use Yoelpc4\LaravelExchangeRate\Contracts\Api\Api;
-use Yoelpc4\LaravelExchangeRate\Contracts\Api\Factory as ApiFactory;
+use Yoelpc4\LaravelExchangeRate\Contracts\Api\Factory;
 use Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRateProvider;
-use Yoelpc4\LaravelExchangeRate\Contracts\Factory;
 
 /**
  * @mixin \Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRateProvider
  */
-class ExchangeRateServiceManager implements Factory
+class ExchangeRateServiceManager
 {
     /**
      * @var Application
@@ -43,7 +42,7 @@ class ExchangeRateServiceManager implements Factory
      */
     public function provider(string $name = null)
     {
-        $name = $name ?: $this->getDefaultName();
+        $name = $name ?? $this->getDefaultName();
 
         return $this->exchangeRateProviders[$name] = $this->get($name);
     }
@@ -73,7 +72,7 @@ class ExchangeRateServiceManager implements Factory
             throw new InvalidArgumentException("Exchange rate provider {$name} is not defined");
         }
 
-        $exchangeRateProviderMethod = 'create'.ucfirst(\Str::camel($config['provider'])).'Provider';
+        $exchangeRateProviderMethod = 'create'.ucfirst(\Str::camel($config['provider']));
 
         if (method_exists($this, $exchangeRateProviderMethod)) {
             return $this->$exchangeRateProviderMethod($config);
@@ -83,13 +82,13 @@ class ExchangeRateServiceManager implements Factory
     }
 
     /**
-     * Create an instance of free currency converter api provider
+     * Create an instance of free currency converter api
      *
      * @param  array  $config
-     * @return FreeCurrencyConverterApiProvider
+     * @return FreeCurrencyConverterApi
      * @throws BindingResolutionException
      */
-    protected function createFreeCurrencyConverterApiProvider(array $config)
+    protected function createFreeCurrencyConverterApi(array $config)
     {
         try {
             $api = $this->resolveApi($config['base_url']);
@@ -97,7 +96,7 @@ class ExchangeRateServiceManager implements Factory
             throw $e;
         }
 
-        return new FreeCurrencyConverterApiProvider($api, $config['api_key']);
+        return new FreeCurrencyConverterApi($api, $config['api_key']);
     }
 
     /**
@@ -110,7 +109,7 @@ class ExchangeRateServiceManager implements Factory
     protected function resolveApi(string $baseUrl)
     {
         try {
-            return app(ApiFactory::class)->make($baseUrl);
+            return app(Factory::class)->make($baseUrl);
         } catch (BindingResolutionException $e) {
             throw $e;
         }

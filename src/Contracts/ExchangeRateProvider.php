@@ -2,54 +2,52 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Contracts;
 
-use GuzzleHttp\Exception\RequestException;
 use Illuminate\Validation\ValidationException;
-use Yoelpc4\LaravelExchangeRate\Currency;
-use Yoelpc4\LaravelExchangeRate\ExchangeRate;
+use Psr\Http\Client\ClientExceptionInterface;
 
 interface ExchangeRateProvider
 {
     /**
      * Get supported currencies
      *
-     * @return Currency[]
-     * @throws RequestException
+     * @return SupportedCurrenciesInterface
+     * @throws ClientExceptionInterface
      */
     public function currencies();
 
     /**
-     * Get latest exchange rate(s)
+     * Get latest exchange rates
      *
      * @param  string  $base
      * @param  string|array  $targets
-     * @return ExchangeRate[]
-     * @throws RequestException
+     * @return LatestExchangeRateInterface
      * @throws ValidationException
+     * @throws ClientExceptionInterface
      */
     public function latest(string $base, $targets);
 
     /**
-     * Get historical exchange rate(s)
+     * Get historical exchange rates
      *
      * @param  string  $base
      * @param  string|array  $targets
      * @param  string  $date
-     * @return ExchangeRate[]
-     * @throws RequestException
+     * @return HistoricalExchangeRateInterface
      * @throws ValidationException
+     * @throws ClientExceptionInterface
      */
     public function historical(string $base, $targets, string $date);
 
     /**
-     * Get time series exchange rate(s)
+     * Get time series exchange rates
      *
      * @param  string  $base
      * @param  string|array  $targets
      * @param  string  $startDate
      * @param  string  $endDate
-     * @return ExchangeRate[]
-     * @throws RequestException
+     * @return TimeSeriesExchangeRateInterface
      * @throws ValidationException
+     * @throws ClientExceptionInterface
      */
     public function timeSeries(string $base, $targets, string $startDate, string $endDate);
 }

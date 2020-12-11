@@ -6,10 +6,10 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static \Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRateProvider provider(string $name = null)
- * @method static \Yoelpc4\LaravelExchangeRate\Currency[] currencies()
- * @method static \Yoelpc4\LaravelExchangeRate\ExchangeRate[] latest(string $base, $targets)
- * @method static \Yoelpc4\LaravelExchangeRate\ExchangeRate[] historical(string $base, $targets, string $date)
- * @method static \Yoelpc4\LaravelExchangeRate\ExchangeRate[] timeSeries(string $base, $targets, string $startDate, string $endDate)
+ * @method static \Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrenciesInterface currencies()
+ * @method static \Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRateInterface latest(string $base, $targets)
+ * @method static \Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRateInterface historical(string $base, $targets, string $date)
+ * @method static \Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRateInterface timeSeries(string $base, $targets, string $startDate, string $endDate)
  *
  * @see \Yoelpc4\LaravelExchangeRate\ExchangeRateServiceManager
  * @see \Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRateProvider

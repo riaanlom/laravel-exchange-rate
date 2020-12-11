@@ -2,7 +2,7 @@
 
 namespace Yoelpc4\LaravelExchangeRate\Contracts\Api;
 
-use GuzzleHttp\Exception\RequestException;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Yoelpc4\LaravelExchangeRate\Contracts\Requestable;
 
@@ -11,9 +11,9 @@ interface Api
     /**
      * Handle an outgoing request.
      *
-     * @param  Requestable  $requestable
+     * @param  Requestable  $request
      * @return ResponseInterface
-     * @throws RequestException
+     * @throws ClientExceptionInterface
      */
-    public function handle(Requestable $requestable);
+    public function handle(Requestable $request);
 }

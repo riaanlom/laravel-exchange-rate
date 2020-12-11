@@ -3,7 +3,7 @@
 namespace Yoelpc4\LaravelExchangeRate\Api;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
+use Psr\Http\Client\ClientExceptionInterface;
 use Yoelpc4\LaravelExchangeRate\Contracts\Api\Api;
 use Yoelpc4\LaravelExchangeRate\Contracts\Requestable;
 
@@ -29,15 +29,15 @@ class GuzzleHttpApi implements Api
     /**
      * @inheritDoc
      */
-    public function handle(Requestable $requestable)
+    public function handle(Requestable $request)
     {
         $options = [
-            'query' => $requestable->query(),
+            'query' => $request->query(),
         ];
 
         try {
-            return $this->client->request($requestable->method(), $requestable->endpoint(), $options);
-        } catch (RequestException $e) {
+            return $this->client->request($request->method(), $request->endpoint(), $options);
+        } catch (ClientExceptionInterface $e) {
             throw $e;
         }
     }

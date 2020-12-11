@@ -7,7 +7,7 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Contributor Covenant][ico-code-of-conduct]](CODE_OF_CONDUCT.md)
 
-_Laravel Exchange Rate helper._
+_Laravel Exchange Rate service._
 
 ## Requirement
 
@@ -17,28 +17,41 @@ _Laravel Exchange Rate helper._
 
 Require this package with composer via command:
 
-```bash
+```shell
 composer require yoelpc4/laravel-exchange-rate
+```
+
+## Available Service Providers
+
+Available exchange rate service providers:
+
+- [Free Currency Converter Api](https://free.currencyconverterapi.com)
+
+## Environment Variable
+
+If you're planning to use `Free Currency Converter Api` as a provider. get your api key [here](https://free.currencyconverterapi.com/free-api-key). 
+Then add these lines to your .env.
+
+```dotenv
+EXCHANGE_RATE_PROVIDER=free_currency_converter_api
+
+FREE_CURRENCY_CONVERTER_API_BASE_URL=https://free.currconv.com/api/v8/
+FREE_CURRENCY_CONVERTER_API_KEY=
 ```
 
 ## Package Publication
 
 Publish package configuration via command:
 
-```bash
+```shell
 php artisan vendor:publish --provider="Yoelpc4\LaravelExchangeRate\ExchangeRateServiceProvider" --tag=config
 ```
 
 Publish package resources via command:
 
-```bash
+```shell
 php artisan vendor:publish --provider="Yoelpc4\LaravelExchangeRate\ExchangeRateServiceProvider" --tag=resources
 ```
-
-## Available Service Providers
-
-Available exchange rate service providers:
-- [Free Currency Converter Api](https://free.currencyconverterapi.com/)
 
 ## Supported Currencies
 
@@ -46,13 +59,13 @@ Get supported currencies
 
 ```php
 try {
-    $currencies = \ExchangeRateService::currencies();
-} catch (\GuzzleHttp\Exception\RequestException $e) {
+    $supportedCurrencies = \ExchangeRateService::currencies();
+} catch (\Psr\Http\Client\ClientExceptionInterface $e) {
     throw $e;
 }
 ```
 
-The return value is an array of `\Yoelpc4\LaravelExchangeRate\Currency` object.
+The return value is an instance of `\Yoelpc4\LaravelExchangeRate\Contracts\SupportedCurrenciesInterface` object.
 
 ## Latest Exchange Rate
 
@@ -69,12 +82,12 @@ try {
     $latestExchangeRate = \ExchangeRateService::latest($base, $targets);
 } catch (\Illuminate\Validation\ValidationException $e) {
     throw $e;
-} catch (\GuzzleHttp\Exception\RequestException $e) {
+} catch (\Psr\Http\Client\ClientExceptionInterface $e) {
     throw $e;
 }
 ```
 
-The return value is an array of `\Yoelpc4\LaravelExchangeRate\ExchangeRate` object.
+The return value is an instance of `\Yoelpc4\LaravelExchangeRate\Contracts\LatestExchangeRateInterface` object.
 
 ## Historical Exchange Rate
 
@@ -93,12 +106,12 @@ try {
     $historicalExchangeRate = \ExchangeRateService::historical($base, $targets, $date);
 } catch (\Illuminate\Validation\ValidationException $e) {
     throw $e;
-} catch (\GuzzleHttp\Exception\RequestException $e) {
+} catch (\Psr\Http\Client\ClientExceptionInterface $e) {
     throw $e;
 }
 ```
 
-The return value is an array of `\Yoelpc4\LaravelExchangeRate\ExchangeRate` object.
+The return value is an instance of `\Yoelpc4\LaravelExchangeRate\Contracts\HistoricalExchangeRateInterface` object.
 
 ## Time Series Exchange Rate
 
@@ -119,23 +132,19 @@ try {
     $timeSeriesExchangeRate = \ExchangeRateService::timeSeries($base, $targets, $startDate, $endDate);
 } catch (\Illuminate\Validation\ValidationException $e) {
     throw $e;
-} catch (\GuzzleHttp\Exception\RequestException $e) {
+} catch (\Psr\Http\Client\ClientExceptionInterface $e) {
     throw $e;
 }
 ```
 
-The return value is an array of `\Yoelpc4\LaravelExchangeRate\ExchangeRate` object.
+The return value is an instance of `\Yoelpc4\LaravelExchangeRate\Contracts\TimeSeriesExchangeRateInterface` object.
 
 ## Switching Provider
 
 Switch between available providers
 
 ```php
-try {
-    $currencies = \ExchangeRateService::provider('free_currency_converter_api')->currencies();
-} catch (\GuzzleHttp\Exception\RequestException $e) {
-    throw $e;
-}
+$exchangeRateService = \ExchangeRateService::provider('free_currency_converter_api');
 ```
 
 ## Caveat

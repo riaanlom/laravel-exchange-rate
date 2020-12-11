@@ -8,17 +8,15 @@ use Yoelpc4\LaravelExchangeRate\Contracts\Validatable;
 trait Validation
 {
     /**
-     * Do a validation
+     * Validate the request
      *
-     * @param  Validatable  $validateable
+     * @param  Validatable  $request
      * @throws ValidationException
      */
-    protected function validate(Validatable $validateable)
+    protected function validate(Validatable $request)
     {
         try {
-            validator($validateable->data(), $validateable->rules(), $validateable->messages(),
-                $validateable->customAttributes())
-                ->validate();
+            validator($request->data(), $request->rules(), $request->messages(), $request->customAttributes())->validate();
         } catch (ValidationException $e) {
             throw $e;
         }

@@ -1,8 +1,10 @@
 <?php
 
-namespace Yoelpc4\LaravelExchangeRate;
+namespace Yoelpc4\LaravelExchangeRate\FreeCurrencyConverterApi;
 
-class ExchangeRate
+use Yoelpc4\LaravelExchangeRate\Contracts\ExchangeRateInterface;
+
+class ExchangeRate implements ExchangeRateInterface
 {
     /**
      * @var string
@@ -29,8 +31,8 @@ class ExchangeRate
      *
      * @param  string  $baseCurrency
      * @param  string  $targetCurrency
-     * @param  float  $value
      * @param  string  $date
+     * @param  float  $value
      */
     public function __construct(string $baseCurrency, string $targetCurrency, string $date, float $value)
     {
@@ -44,9 +46,7 @@ class ExchangeRate
     }
 
     /**
-     * Get exchange rate's base currency
-     *
-     * @return string
+     * @inheritDoc
      */
     public function baseCurrency()
     {
@@ -54,9 +54,7 @@ class ExchangeRate
     }
 
     /**
-     * Get exchange rate's target currency
-     *
-     * @return string
+     * @inheritDoc
      */
     public function targetCurrency()
     {
@@ -64,9 +62,7 @@ class ExchangeRate
     }
 
     /**
-     * Get exchange rate's date
-     *
-     * @return string
+     * @inheritDoc
      */
     public function date()
     {
@@ -74,9 +70,7 @@ class ExchangeRate
     }
 
     /**
-     * Get exchange rate value
-     *
-     * @return float
+     * @inheritDoc
      */
     public function value()
     {

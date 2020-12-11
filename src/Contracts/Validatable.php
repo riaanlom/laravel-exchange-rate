@@ -5,28 +5,28 @@ namespace Yoelpc4\LaravelExchangeRate\Contracts;
 interface Validatable
 {
     /**
-     * Get must validated's data
+     * Get validatable data
      *
      * @return array
      */
     public function data();
 
     /**
-     * Get must validated's rules
+     * Get validatable rules
      *
      * @return array
      */
     public function rules();
 
     /**
-     * Get must validated's messages
+     * Get validatable messages
      *
      * @return array
      */
     public function messages();
 
     /**
-     * Get must validated's custom attributes
+     * Get validatable custom attributes
      *
      * @return array
      */
