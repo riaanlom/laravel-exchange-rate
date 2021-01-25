@@ -16,9 +16,7 @@ use Yoelpc4\LaravelExchangeRate\FreeCurrencyConverterApi;
 
 class FreeCurrencyConverterApiTest extends TestCase
 {
-    /**
-     *
-     */
+    /** @test */
     public function testExpectedProvider()
     {
         $exchangeRateService = ExchangeRateService::provider('free_currency_converter_api');
@@ -26,9 +24,7 @@ class FreeCurrencyConverterApiTest extends TestCase
         $this->assertInstanceOf(FreeCurrencyConverterApi::class, $exchangeRateService);
     }
 
-    /**
-     * @throws ClientExceptionInterface
-     */
+    /** @test */
     public function testSuccessfulGetSupportedCurrencies()
     {
         try {
@@ -51,10 +47,7 @@ class FreeCurrencyConverterApiTest extends TestCase
         }
     }
 
-    /**
-     * @throws ValidationException
-     * @throws ClientExceptionInterface
-     */
+    /** @test */
     public function testSuccessfulGetLatestExchangeRate()
     {
         $base = 'IDR';
@@ -88,10 +81,7 @@ class FreeCurrencyConverterApiTest extends TestCase
         }
     }
 
-    /**
-     * @throws ValidationException
-     * @throws ClientExceptionInterface
-     */
+    /** @test */
     public function testSuccessfulGetHistoricalExchangeRate()
     {
         $base = 'IDR';
@@ -127,10 +117,7 @@ class FreeCurrencyConverterApiTest extends TestCase
         }
     }
 
-    /**
-     * @throws ValidationException
-     * @throws ClientExceptionInterface
-     */
+    /** @test */
     public function testSuccessfulGetTimeSeriesExchangeRate()
     {
         $base = 'IDR';
