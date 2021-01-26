@@ -40,7 +40,7 @@ class LatestExchangeRate implements LatestExchangeRateInterface
             [$baseCurrency, $targetCurrency] = explode('_', $index);
 
             return new ExchangeRate($baseCurrency, $targetCurrency, $date, $value);
-        });
+        })->all();
     }
 
     /**

@@ -46,7 +46,7 @@ class HistoricalExchangeRate implements HistoricalExchangeRateInterface
             [$baseCurrency, $targetCurrency] = explode('_', $index);
 
             return new ExchangeRate($baseCurrency, $targetCurrency, $date, $values[$date]);
-        });
+        })->all();
     }
 
     /**
