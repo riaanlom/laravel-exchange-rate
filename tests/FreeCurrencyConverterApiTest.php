@@ -25,7 +25,7 @@ class FreeCurrencyConverterApiTest extends TestCase
     }
 
     /** @test */
-    public function testSuccessfulGetSupportedCurrencies()
+    public function testGetSupportedCurrencies()
     {
         try {
             $supportedCurrencies = ExchangeRateService::provider('free_currency_converter_api')
@@ -48,7 +48,7 @@ class FreeCurrencyConverterApiTest extends TestCase
     }
 
     /** @test */
-    public function testSuccessfulGetLatestExchangeRate()
+    public function testGetLatestExchangeRate()
     {
         $base = 'IDR';
 
@@ -82,7 +82,7 @@ class FreeCurrencyConverterApiTest extends TestCase
     }
 
     /** @test */
-    public function testSuccessfulGetHistoricalExchangeRate()
+    public function testGetHistoricalExchangeRate()
     {
         $base = 'IDR';
 
@@ -118,7 +118,7 @@ class FreeCurrencyConverterApiTest extends TestCase
     }
 
     /** @test */
-    public function testSuccessfulGetTimeSeriesExchangeRate()
+    public function testGetTimeSeriesExchangeRate()
     {
         $base = 'IDR';
 
